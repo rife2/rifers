@@ -1,11 +1,11 @@
 body {
-    background: #0f0f0f;
+    background: #0d0d0d;
     font-family: 'Source Sans Pro', sans-serif;
-    line-height: 120%;
     -webkit-font-smoothing: antialiased;
-    color: #f1f1f1;
+    color: #d0d0d0;
     font-size: 18px;
-    padding: 1em;
+    margin: 0;
+    padding: 0 0 2em 0;
 }
 code[class*=language-], pre[class*=language-] {
     font-size: 14px;
@@ -14,22 +14,29 @@ code[class*=language-], pre[class*=language-] {
     background-color: #242424;
 }
 .token + .function {
-    /*color: #FA9052;*/
+    color: #FA9052;
 }
 .header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    background: #171717;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    margin: 1em 1em 2em 1em;
+    margin: 0;
+    padding: 1em 0 1.5em 0;
+    border-bottom: black solid 1px;
 }
 .logo {
     flex-grow: 0;
-    min-width: 300px;
+    width: 200px;
 }
 .pitch {
     flex-grow: 0;
     margin: 1em 0 6px 2em;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 120%;
     font-style: italic;
     text-justify: auto;
@@ -39,36 +46,58 @@ code[class*=language-], pre[class*=language-] {
     color: #eeeeee;
     font-weight: 300;
 }
-.hello-world {
-    margin-top: 4em;
+.content {
+    margin: 1em 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
 }
-.hello-world div {
+.content div {
     min-width: 720px;
     flex-grow: 1;
 }
-a {
-    text-decoration: none;
+.content h1 {
+    width: 720px;
+    margin: 1em 0 0 0;
+    color: #f1f1f1;
+    font-size: 24px;
+}
+.content p {
+    width: 720px;
+    margin: 1em 0 0 0;
+}
+a, a:visited {
+    color: #d0d0d0;
 }
 
 @media screen and (max-width: 840px) {
     .header {
         flex-direction: column;
         align-items: baseline;
+        padding-left: 3em;
+        padding-right: 3em;
+        width: auto;
+    }
+    .logo {
+        flex-grow: 0;
+        width: 150px;
     }
     .pitch {
-        margin: 1em 1em 0 1em;
-        font-size: 22px;
+        margin: 0.5em 2em 0 43px;
+        font-size: 18px;
     }
-    .hello-world {
-        margin-top: 0;
+    .content {
         flex-direction: column;
         align-items: stretch;
     }
-    .hello-world div {
+    .content h1 {
+        width: auto;
+    }
+    .content p {
+        width: auto;
+    }
+    .content div {
         min-width: auto;
         flex-grow: 1;
     }

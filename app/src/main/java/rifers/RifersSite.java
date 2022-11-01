@@ -10,7 +10,6 @@ public class RifersSite extends Site {
 
     public static void main(String[] args) {
         new Server()
-            .port(4242)
             .staticResourceBase("src/main/webapp")
             .start(new RifersSite());
     }
