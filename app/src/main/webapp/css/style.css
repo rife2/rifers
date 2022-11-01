@@ -84,6 +84,24 @@ a, a:visited {
 }
 
 @media screen and (max-width: 840px) {
+    .logo {
+        width: 150px;
+    }
+    .pitch {
+        font-size: 18px;
+    }
+    .content div {
+        min-width: 580px;
+    }
+    .content h1 {
+        width: 580px;
+    }
+    .content p {
+        width: 580px;
+    }
+}
+
+@media screen and (max-width: 640px) {
     .header {
         flex-direction: column;
         align-items: baseline;
@@ -96,7 +114,7 @@ a, a:visited {
         width: 150px;
     }
     .pitch {
-        margin: 0.5em 2em 0 43px;
+        margin: 0.5em 2em 0 0;
         font-size: 18px;
     }
     .content {
