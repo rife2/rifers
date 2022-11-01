@@ -139,3 +139,28 @@ a, a:visited {
         flex-grow: 1;
     }
 }
+
+@media screen and (max-width: 380px) {
+    #fork-me {
+        display: none;
+    }
+    .header {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+    .logo {
+        width: 120px;
+    }
+    .pitch {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .logo {
+        width: 100px;
+    }
+    .pitch {
+        font-size: 14px;
+    }
+}
