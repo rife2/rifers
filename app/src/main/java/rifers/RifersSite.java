@@ -1,8 +1,6 @@
 package rifers;
 
-import rife.engine.Route;
-import rife.engine.Site;
-import rife.server.Server;
+import rife.engine.*;
 import rifers.elements.Home;
 
 public class RifersSite extends Site {
