@@ -13,8 +13,15 @@ code[class*=language-], pre[class*=language-] {
     font-variant-ligatures: none;
     background-color: #242424;
 }
-.token + .function {
-    color: #FA9052;
+.token.function {
+    color: #ffa267;
+}
+.token.keyword  {
+    color: #6caaff;
+}
+a, a:visited {
+    color: #d0d0d0;
+    text-underline-offset: 4px;
 }
 .header {
     position: sticky;
@@ -67,8 +74,13 @@ code[class*=language-], pre[class*=language-] {
     width: 720px;
     margin: 1em 0 0 0;
 }
-a, a:visited {
-    color: #d0d0d0;
+.discord {
+    font-style: italic;
+    text-align: center;
+    color: #aaa;
+}
+.discord a, .discord a:visited {
+    color: #6caaff;
 }
 
 @media screen and (max-width: 840px) {

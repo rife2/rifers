@@ -8,7 +8,7 @@
 
 Go to:
 
-[http://localhost:4242/](http://localhost:4242/)
+[http://localhost:8080/](http://localhost:8080/)
 
 
 ## Deploying the app
