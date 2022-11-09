@@ -7,8 +7,11 @@ import rifers.elements.Home;
 public class RifersSite extends Site {
     public final Route home = get("/", Home.class);
 
-    public static void main(String[] args) {
+    public void setup() {
         RifeConfig.engine().setProxyRootUrl("https://rife2.com");
+    }
+
+    public static void main(String[] args) {
         new Server()
             .staticResourceBase("src/main/webapp")
             .start(new RifersSite());
