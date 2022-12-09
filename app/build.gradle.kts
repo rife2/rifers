@@ -29,7 +29,7 @@ application {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.9")
     testImplementation("org.jsoup:jsoup:1.15.3")
     runtimeOnly("org.slf4j:slf4j-simple:2.0.3")
     runtimeOnly("org.eclipse.jetty:jetty-server:11.0.12")
