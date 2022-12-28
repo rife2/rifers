@@ -1,6 +1,6 @@
 plugins {
     `java-library`
-    application
+    java
 }
 
 base {
@@ -24,15 +24,12 @@ sourceSets {
     }
 }
 
-application {
-    mainClass.set("rifers.RifersSite")
-}
-
 dependencies {
     runtimeOnly("org.slf4j:slf4j-simple:2.0.3")
     runtimeOnly("org.eclipse.jetty:jetty-server:11.0.12")
     runtimeOnly("org.eclipse.jetty:jetty-servlet:11.0.12")
-    implementation("com.uwyn.rife2:rife2:0.8.5")
+    implementation("com.uwyn.rife2:rife2:0.9.0")
+    runtimeOnly("com.uwyn.rife2:rife2:0.9.0:agent")
     testImplementation("org.jsoup:jsoup:1.15.3")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 }
@@ -56,6 +53,15 @@ tasks.register("precompileTemplates") {
 
 tasks.jar {
     dependsOn("precompileTemplates")
+}
+
+tasks.register<JavaExec>("run") {
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("rifers.RifersSite")
+    val rifeAgentJar = configurations.runtimeClasspath.get().files
+        .filter { it.toString().contains("rife2") }
+        .filter { it.toString().endsWith("-agent.jar") }[0]
+    jvmArgs = listOf("-javaagent:$rifeAgentJar")
 }
 
 tasks.named<Test>("test") {
