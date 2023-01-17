@@ -28,8 +28,8 @@ dependencies {
     runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
     runtimeOnly("org.eclipse.jetty:jetty-server:11.0.13")
     runtimeOnly("org.eclipse.jetty:jetty-servlet:11.0.13")
-    implementation("com.uwyn.rife2:rife2:0.9.6")
-    runtimeOnly("com.uwyn.rife2:rife2:0.9.6:agent")
+    implementation("com.uwyn.rife2:rife2:0.9.8")
+    runtimeOnly("com.uwyn.rife2:rife2:0.9.8:agent")
     testImplementation("org.jsoup:jsoup:1.15.3")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
 }
