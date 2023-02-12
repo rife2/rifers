@@ -1,10 +1,10 @@
-# rifers.org website
+# rife2.com website
 
 ## Running the server
 
-~~~
-./gradlew run
-~~~
+```bash
+./gradlew clean run
+```
 
 Go to:
 
@@ -13,9 +13,23 @@ Go to:
 
 ## Deploying the app
 
-~~~
-./gradlew war
-~~~
+```bash
+./gradlew clean war
+```
 
 The resulting archive will be in:
 `war/build/libs`
+
+
+## Making an UberJar
+
+
+```bash
+./gradlew clean uberJar
+```
+
+Then run it with:
+
+```bash
+java -jar app/build/libs/rifers-uber-1.0.jar
+```
