@@ -8,7 +8,9 @@ public class RifersSite extends Site {
     public final Route home = get("/", Home.class);
 
     public void setup() {
-        RifeConfig.engine().setProxyRootUrl("https://rife2.com");
+        if (properties().contains("rifers.production.deployment")) {
+            RifeConfig.engine().setProxyRootUrl("https://rife2.com");
+        }
     }
 
     public static void main(String[] args) {
@@ -17,4 +19,3 @@ public class RifersSite extends Site {
             .start(new RifersSite());
     }
 }
-

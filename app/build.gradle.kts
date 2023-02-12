@@ -16,6 +16,7 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") } // only needed for SNAPSHOT
 }
 
 sourceSets {
@@ -28,7 +29,7 @@ dependencies {
     runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
     runtimeOnly("org.eclipse.jetty:jetty-server:11.0.13")
     runtimeOnly("org.eclipse.jetty:jetty-servlet:11.0.13")
-    implementation("com.uwyn.rife2:rife2:1.0.0")
+    implementation("com.uwyn.rife2:rife2:1.1.0-SNAPSHOT")
     runtimeOnly("com.uwyn.rife2:rife2:1.0.0:agent")
     testImplementation("org.jsoup:jsoup:1.15.3")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
@@ -38,32 +39,57 @@ sourceSets.main {
     resources.exclude("templates/**")
 }
 
-tasks.register<JavaExec>("precompileHtmlTemplates") {
-    classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("rife.template.TemplateDeployer")
-    args = listOf("-verbose",
-        "-t", "html",
-        "-d", "${projectDir}/build/classes/java/main",
-        "-encoding", "UTF-8", "${projectDir}/src/main/resources/templates")
-}
+tasks {
+    register<JavaExec>("precompileHtmlTemplates") {
+        classpath = sourceSets["main"].runtimeClasspath
+        mainClass.set("rife.template.TemplateDeployer")
+        args = listOf(
+            "-verbose",
+            "-t", "html",
+            "-d", "${projectDir}/build/classes/java/main",
+            "-encoding", "UTF-8", "${projectDir}/src/main/resources/templates"
+        )
+    }
 
-tasks.register("precompileTemplates") {
-    dependsOn("precompileHtmlTemplates")
-}
+    register("precompileTemplates") {
+        dependsOn("precompileHtmlTemplates")
+    }
 
-tasks.jar {
-    dependsOn("precompileTemplates")
-}
+    jar {
+        dependsOn("precompileTemplates")
+    }
 
-tasks.register<JavaExec>("run") {
-    classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("rifers.RifersSite")
-    val rifeAgentJar = configurations.runtimeClasspath.get().files
-        .filter { it.toString().contains("rife2") }
-        .filter { it.toString().endsWith("-agent.jar") }[0]
-    jvmArgs = listOf("-javaagent:$rifeAgentJar")
-}
+    register<Copy>("copyWebapp") {
+        from("src/main/")
+        include("webapp/**")
+        into("$buildDir/webapp")
+    }
 
-tasks.named<Test>("test") {
-    useJUnitPlatform()
+    register<Jar>("uberJar") {
+        dependsOn("jar")
+        dependsOn("copyWebapp")
+        archiveBaseName.set("rifers-uber")
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        manifest {
+            attributes["Main-Class"] = "rifers.RifersSiteUber"
+        }
+        val dependencies = configurations
+            .runtimeClasspath.get()
+            .map(::zipTree)
+        from(dependencies, "$buildDir/webapp")
+        with(jar.get())
+    }
+
+    register<JavaExec>("run") {
+        classpath = sourceSets["main"].runtimeClasspath
+        mainClass.set("rifers.RifersSite")
+        val rifeAgentJar = configurations.runtimeClasspath.get().files
+            .filter { it.toString().contains("rife2") }
+            .filter { it.toString().endsWith("-agent.jar") }[0]
+        jvmArgs = listOf("-javaagent:$rifeAgentJar")
+    }
+
+    named<Test>("test") {
+        useJUnitPlatform()
+    }
 }
