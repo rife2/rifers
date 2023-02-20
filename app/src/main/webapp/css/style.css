@@ -1,8 +1,19 @@
+:root {
+    /* colors */
+    --main-background-color: #0d0d0d;
+    --code-background-color: #242424;
+    --main-text-color: #d0d0d0;
+    --cards-background-color: #e0e0e0;
+    --cards-text-color: #0d0d0d;
+
+    /* widths */
+    --card-width: 240px;
+}
 body {
-    background: #0d0d0d;
+    background: var(--main-background-color);
     font-family: 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
-    color: #d0d0d0;
+    color: var(--main-text-color);
     font-size: 18px;
     margin: 0;
     padding: 0 0 2em 0;
@@ -11,7 +22,7 @@ code[class*=language-], pre[class*=language-] {
     font-size: 14px;
     font-family: 'JetBrains Mono',Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;
     font-variant-ligatures: none;
-    background-color: #242424;
+    background-color: var(--code-background-color);
 }
 .token.function {
     color: #ffa267;
@@ -82,8 +93,32 @@ a, a:visited {
 .links a, .links a:visited {
     color: #6caaff;
 }
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 1em;
+}
+.card {
+    font-family: sans-serif;
+    background: var(--cards-background-color);
+    color: var(--cards-text-color) !important;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 1em;
+    place-self: center;
+    text-decoration: none;
+    width: var(--card-width);
+    align-self: center;
+    text-align: center;
+}
 
 @media screen and (max-width: 840px) {
+    :root {
+        --card-width: 220px;
+    }
     body {
         font-size: 16px;
     }
@@ -109,6 +144,9 @@ a, a:visited {
 }
 
 @media screen and (max-width: 640px) {
+    :root {
+        --card-width: 180px;
+    }
     .header {
         flex-direction: column;
         align-items: baseline;
@@ -141,6 +179,9 @@ a, a:visited {
 }
 
 @media screen and (max-width: 380px) {
+    :root {
+        --card-width: 160px;
+    }
     #fork-me {
         display: none;
     }

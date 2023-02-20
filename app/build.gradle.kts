@@ -26,11 +26,11 @@ sourceSets {
 }
 
 dependencies {
+    implementation("com.uwyn.rife2:rife2:1.3.0")
+    runtimeOnly("com.uwyn.rife2:rife2:1.3.0:agent")
     runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
     runtimeOnly("org.eclipse.jetty:jetty-server:11.0.13")
     runtimeOnly("org.eclipse.jetty:jetty-servlet:11.0.13")
-    implementation("com.uwyn.rife2:rife2:1.1.0")
-    runtimeOnly("com.uwyn.rife2:rife2:1.0.0:agent")
     testImplementation("org.jsoup:jsoup:1.15.3")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
 }
