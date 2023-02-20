@@ -5,6 +5,8 @@
     --main-text-color: #d0d0d0;
     --cards-background-color: #e0e0e0;
     --cards-text-color: #0d0d0d;
+    --cards-hover-background-color: #3c9efc;
+    --cards-hover-text-color: #ffffff;
 
     /* widths */
     --card-width: 240px;
@@ -113,6 +115,13 @@ a, a:visited {
     width: var(--card-width);
     align-self: center;
     text-align: center;
+}
+@media (hover: hover) {
+    .card:hover {
+        background: var(--cards-hover-background-color);
+        color: var(--cards-hover-text-color) !important;
+
+    }
 }
 
 @media screen and (max-width: 840px) {
