@@ -95,6 +95,14 @@ a, a:visited {
 .links a, .links a:visited {
     color: #6caaff;
 }
+.features {
+    text-align: center;
+}
+.features ul {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+}
 .cards {
     display: flex;
     flex-wrap: wrap;
