@@ -10,6 +10,7 @@
 
     /* widths */
     --card-width: 240px;
+    --content-width: 720px;
 }
 body {
     background: var(--main-background-color);
@@ -74,18 +75,55 @@ a, a:visited {
     gap: 1em;
 }
 .content div {
-    min-width: 720px;
+    min-width: var(--content-width);
     flex-grow: 1;
 }
 .content h1 {
-    width: 720px;
+    width: var(--content-width);
     margin: 1em 0 0 0;
     color: #f1f1f1;
     font-size: 24px;
 }
 .content p {
-    width: 720px;
+    width: var(--content-width);
     margin: 1em 0 0 0;
+}
+.users {
+    display: grid;
+    width: var(--content-width);
+    gap: 1em 2em;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "moog uwyn dynamod"
+    "dataswift dataswift dataswift";
+    justify-items: center;
+}
+.users a {
+    width: 100%;
+}
+.users img {
+    width: 100%;
+    opacity: 0.5;
+    border: 0;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+.users a:nth-child(1) {
+    grid-area: moog;
+}
+.users a:nth-child(2) {
+    grid-area: uwyn;
+}
+.users a:nth-child(3) {
+    grid-area: dynamod;
+}
+.users a:nth-child(4) {
+    grid-area: dataswift;
+    width: 62%;
+}
+.users a img:hover {
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 .links {
     font-style: italic;
