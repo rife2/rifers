@@ -2,7 +2,7 @@ import com.uwyn.rife2.gradle.TemplateType.*
 
 plugins {
     application
-    id("com.uwyn.rife2") version "1.0.3"
+    id("com.uwyn.rife2") version "1.0.4"
 }
 
 base {
