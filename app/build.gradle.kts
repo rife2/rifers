@@ -5,9 +5,11 @@ plugins {
     id("com.uwyn.rife2") version "1.0.5"
 }
 
+version = 1.0
+group = "com.uwyn"
+
 base {
     archivesName.set("rifers")
-    version = 1.0
 }
 
 java {
