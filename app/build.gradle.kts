@@ -2,7 +2,7 @@ import com.uwyn.rife2.gradle.TemplateType.*
 
 plugins {
     application
-    id("com.uwyn.rife2") version "1.0.6"
+    id("com.uwyn.rife2") version "1.0.7"
 }
 
 version = 1.0
@@ -25,7 +25,6 @@ repositories {
 
 rife2 {
     version.set("1.4.0")
-    useAgent.set(true)
     precompiledTemplateTypes.add(HTML)
     uberMainClass.set("rifers.RifersSiteUber")
 }
