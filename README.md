@@ -25,7 +25,7 @@ The resulting archive will be in:
 
 
 ```bash
-./gradlew clean uberJar
+./gradlew clean uberjar
 ```
 
 Then run it with:
