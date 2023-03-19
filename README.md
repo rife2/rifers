@@ -3,7 +3,7 @@
 ## Running the server
 
 ```bash
-./gradlew clean run
+./bld.sh compile run
 ```
 
 Go to:
@@ -14,7 +14,7 @@ Go to:
 ## Deploying the app
 
 ```bash
-./gradlew clean war
+./bld.sh war
 ```
 
 The resulting archive will be in:
@@ -25,11 +25,11 @@ The resulting archive will be in:
 
 
 ```bash
-./gradlew clean uberjar
+./bld.sh uberjar
 ```
 
 Then run it with:
 
 ```bash
-java -jar app/build/libs/rifers-uber-1.0.jar
+java -jar build/dist/rifers-1.0.0-uber.jar
 ```
