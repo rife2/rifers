@@ -1,5 +1,11 @@
 # rife2.com website
 
+## Download the dependencies
+
+```bash
+./bld.sh download
+```
+
 ## Running the server
 
 ```bash
