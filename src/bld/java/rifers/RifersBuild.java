@@ -20,7 +20,7 @@ public class RifersBuild extends WebProject {
 
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
         scope(compile)
-            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,0)));
+            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,2)));
         scope(test)
             .include(dependency("org.jsoup", "jsoup", version(1,15,4)))
             .include(dependency("org.junit.jupiter", "junit-jupiter", version(5,9,2)))
@@ -28,7 +28,7 @@ public class RifersBuild extends WebProject {
         scope(standalone)
             .include(dependency("org.eclipse.jetty", "jetty-server", version(11,0,14)))
             .include(dependency("org.eclipse.jetty", "jetty-servlet", version(11,0,14)))
-            .include(dependency("org.slf4j", "slf4j-simple", version(2,0,5)));
+            .include(dependency("org.slf4j", "slf4j-simple", version(2,0,7)));
     }
 
     public static void main(String[] args) {

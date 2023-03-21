@@ -3,13 +3,13 @@
 ## Download the dependencies
 
 ```bash
-./bld.sh download
+./bld download
 ```
 
 ## Running the server
 
 ```bash
-./bld.sh compile run
+./bld compile run
 ```
 
 Go to:
@@ -20,7 +20,7 @@ Go to:
 ## Deploying the app
 
 ```bash
-./bld.sh war
+./bld war
 ```
 
 The resulting archive will be in:
@@ -31,7 +31,7 @@ The resulting archive will be in:
 
 
 ```bash
-./bld.sh uberjar
+./bld uberjar
 ```
 
 Then run it with:
