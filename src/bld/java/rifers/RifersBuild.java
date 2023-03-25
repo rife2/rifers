@@ -18,9 +18,10 @@ public class RifersBuild extends WebProject {
 
         precompiledTemplateTypes = List.of(HTML);
 
+        downloadSources = true;
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
         scope(compile)
-            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,5)));
+            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,6)));
         scope(test)
             .include(dependency("org.jsoup", "jsoup", version(1,15,4)))
             .include(dependency("org.junit.jupiter", "junit-jupiter", version(5,9,2)))
