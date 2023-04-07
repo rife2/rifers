@@ -16,13 +16,12 @@ public class RifersBuild extends WebProject {
         uberJarMainClass = "rifers.RifersSiteUber";
         version = version(1,0,0);
 
-        precompiledTemplateTypes = List.of(HTML);
-
         downloadSources = true;
         autoDownloadPurge = true;
-        repositories = List.of(MAVEN_CENTRAL, RIFE2);
+
+        repositories = List.of(MAVEN_CENTRAL, repository("https://repo.rife2.com/snapshots"), RIFE2);
         scope(compile)
-            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,17)));
+            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,18,"SNAPSHOT")));
         scope(test)
             .include(dependency("org.jsoup", "jsoup", version(1,15,4)))
             .include(dependency("org.junit.jupiter", "junit-jupiter", version(5,9,2)))
@@ -31,6 +30,9 @@ public class RifersBuild extends WebProject {
             .include(dependency("org.eclipse.jetty", "jetty-server", version(11,0,14)))
             .include(dependency("org.eclipse.jetty", "jetty-servlet", version(11,0,14)))
             .include(dependency("org.slf4j", "slf4j-simple", version(2,0,7)));
+
+        precompileOperation()
+            .templateTypes(HTML);
     }
 
     public static void main(String[] args) {
