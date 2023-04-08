@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="RIFE2 bld - pure Java build tool">
+    <meta property="og:description"
+          content="RIFE2 bld is a new build system that allows you to write your build logic in pure Java.">
+    <meta property="og:url" content="https://rife2.com/bld"/>
+    <meta charset="UTF-8">
+    <title>RIFE2 bld is a new build system that allows you to write your build logic in pure Java.</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{v webapp:rootUrl/}}images/og-bld.png?{{v context:paramRandom/}}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:creator" content="@gbevin">
+    <meta property="twitter:site" content="@gbevin">
+    <meta property="twitter:title" content="RIFE2 bld - pure Java build tool">
+    <meta property="twitter:description" content="RIFE2 bld is a new build system that allows you to write your build logic in pure Java.">
+    <meta property="twitter:image" content="{{v webapp:rootUrl/}}images/og-bld.png?{{v context:paramRandom/}}">
+    <meta name="generator" content="RIFE2">
+    <!--v head_section/-->
+</head>
+<!--i common/-->
+
+<body>
+<script src="js/prism.js"></script>
+
+<a id="fork-me" href="https://github.com/rife2/rife2">
+    <img style="position:fixed;top:0;right:0;border:0;z-index:99999"
+         src="data:image/png;base64,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"
+         alt="Fork me on GitHub">
+</a>
+
+<div class="header">
+    <div class="bld-logo"><img src="images/bld_logo.svg"></div>
+    <div class="pitch">Pure java build tool for developers<br>who don't like dealing with build tools</div>
+</div>
+
+<div class="content">
+    <h1>What is bld?</h1>
+
+    <p>RIFE2 <code>bld</code> is a new build system that allows you to write your build logic in pure Java.</p>
+    <p><code>bld</code> was created by me, Geert Bevin, the creator of the <a href="{{v route:home/}}">RIFE2 web framework</a> and one of the first Java Champions.
+        I created <code>bld</code> because I'm not really interested in build tools. I use them because I have to, but I'd rather just get on with coding the real stuff.</p>
+
+    <p><code>bld</code> is designed with the following principles in mind:</p>
+    <ul>
+        <li>nothing happens without you telling it to happen</li>
+        <li>no implicit task dependencies that could turn into auto-magical behavior</li>
+        <li>managing libs yourself is fine, having that automated also, or mix and match</li>
+        <li>build logic is written in Java, with all the advantages of Java</li>
+        <li><code>bld</code> is part of RIFE2, if you have the RIFE2 jar, you have the build system</li>
+    </ul>
+
+    <p class="links">
+        <a rel="me" href="https://uwyn.net/@gbevin">Follow Geert on Mastodon</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://discord.gg/DZRYPtkb6J">Join Geert on Discord</a>
+    </p>
+
+    <h1>Designed for modern Java</h1>
+
+    <p>bld relies on Java 17 and leverages many of the features that this version of Java provides. Thanks to the modern language constructs, your Java build logic ends up looking very concise, is easily readable and understood by any IDE. You automatically get support for auto-completion and javadoc documentation, and you can split your build logic into multiple files and classes when you outgrow a single file.</p>
+
+    <p>Here is a complete bld file for a Java application using JUnit 5 for its tests. Nothing else is needed to be able to run it, test it and distribute it:</p>
+
+    <div>
+        <pre data-src="{{v webapp:rootUrl/}}examples/MyappBuild.java"></pre>
+    </div>
+
+    <h1>Where does bld fit?</h1>
+
+    <p>From a very high level, build tools can be organized in a matrix:</p>
+    <ul>
+        <li>either your tool is declarative or in code</li>
+        <li>either your tool first describes a plan or immediately executes a plan</li>
+    </ul>
+
+    <table class="bld-matrix">
+        <tr><th></th><th>Declarative</th><th>Code</th><th>Describes</th><th>Immediate</th></tr>
+        <tr><td>Maven</td><td>✔︎</td><td></td><td>✔︎</td><td></td></tr>
+        <tr><td>Gradle</td><td></td><td>✔︎</td><td>✔︎</td><td></td></tr>
+        <tr><td><code>bld</code></td><td></td><td>✔︎</td><td></td><td>✔︎</td></tr>
+    </table>
+
+    <p>Writing your build logic in the same language as your application (Java), significantly reduces the cognitive load, and taking actions immediately without having to mentally construct a described plan, makes it easier to reason about your build.</p>
+
+    <h1>Find Out More</h1>
+
+    <p><code>bld</code> lets your build logic get out of the way so that you can focus on writing applications.</p>
+
+    <p class="links">
+        <a href="https://github.com/rife2/rife2/wiki/What-Is-Bld">Visit the project and read the documentation</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+
+</div>
+
+</body>
+</html>

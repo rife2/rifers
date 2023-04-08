@@ -8,6 +8,9 @@
     --cards-hover-background-color: #3c9efc;
     --cards-hover-text-color: #ffffff;
 
+    /* borders */
+    --table-border: 1px solid #242424;
+
     /* widths */
     --card-width: 240px;
     --content-width: 720px;
@@ -53,6 +56,10 @@ a, a:visited {
 .logo {
     flex-grow: 0;
     width: 200px;
+}
+.bld-logo {
+    flex-grow: 0;
+    width: 96px;
 }
 .pitch {
     flex-grow: 0;
@@ -136,9 +143,17 @@ a, a:visited {
 .features {
     text-align: center;
 }
-.features ul {
+p, ul {
+    margin: 0 auto;
+}
+.content ul {
+    width: var(--content-width);
     display: inline-block;
     text-align: left;
+    margin: 1em auto 0 auto;
+}
+.features ul {
+    width: auto;
     margin: 0 auto;
 }
 .cards {
@@ -162,17 +177,36 @@ a, a:visited {
     align-self: center;
     text-align: center;
 }
+.bld-matrix {
+    margin-top: 1em;
+    width: var(--content-width);
+    border: var(--table-border);
+    border-collapse: collapse;
+    background-color: #111
+}
+.bld-matrix th {
+    padding: 0.5em;
+}
+.bld-matrix td {
+    width: 20%;
+    text-align: center;
+    border: var(--table-border);
+    padding: 0.5em;
+}
+.bld-matrix td:first-child {
+    text-align: left;
+}
 @media (hover: hover) {
     .card:hover {
         background: var(--cards-hover-background-color);
         color: var(--cards-hover-text-color) !important;
-
     }
 }
 
 @media screen and (max-width: 840px) {
     :root {
         --card-width: 220px;
+        --content-width: 580px;
     }
     body {
         font-size: 16px;
@@ -186,21 +220,15 @@ a, a:visited {
     .pitch {
         font-size: 18px;
     }
-    .content div {
-        min-width: 580px;
-    }
     .content h1 {
-        width: 580px;
         font-size: 21px;
-    }
-    .content p {
-        width: 580px;
     }
 }
 
 @media screen and (max-width: 640px) {
     :root {
         --card-width: 180px;
+        --content-width: auto;
     }
     .header {
         flex-direction: column;
@@ -221,14 +249,7 @@ a, a:visited {
         flex-direction: column;
         align-items: stretch;
     }
-    .content h1 {
-        width: auto;
-    }
-    .content p {
-        width: auto;
-    }
     .content div {
-        min-width: auto;
         flex-grow: 1;
     }
 }
