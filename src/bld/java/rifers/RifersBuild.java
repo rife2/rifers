@@ -21,14 +21,14 @@ public class RifersBuild extends WebProject {
 
         repositories = List.of(MAVEN_CENTRAL, RIFE2_RELEASES);
         scope(compile)
-            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,20)));
+            .include(dependency("com.uwyn.rife2", "rife2", version(1,5,22)));
         scope(test)
             .include(dependency("org.jsoup", "jsoup", version(1,15,4)))
             .include(dependency("org.junit.jupiter", "junit-jupiter", version(5,9,2)))
             .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1,9,2)));
         scope(standalone)
-            .include(dependency("org.eclipse.jetty", "jetty-server", version(11,0,14)))
-            .include(dependency("org.eclipse.jetty", "jetty-servlet", version(11,0,14)))
+            .include(dependency("org.eclipse.jetty", "jetty-server", version(11,0,15)))
+            .include(dependency("org.eclipse.jetty", "jetty-servlet", version(11,0,15)))
             .include(dependency("org.slf4j", "slf4j-simple", version(2,0,7)));
 
         precompileOperation()
