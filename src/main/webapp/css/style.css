@@ -57,6 +57,13 @@ a, a:visited {
     flex-grow: 0;
     width: 200px;
 }
+div.powered {
+    margin-top: 2em;
+    text-align: center;
+}
+img.powered {
+    width: 140px;
+}
 .bld-logo {
     flex-grow: 0;
     width: 96px;
