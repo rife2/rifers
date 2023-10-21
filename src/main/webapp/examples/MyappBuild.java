@@ -17,10 +17,10 @@ public class MyappBuild extends Project {
         scope(test)
             .include(dependency("org.junit.jupiter",
                                 "junit-jupiter",
-                                version(5,9,3)))
+                                version(5,10,0)))
             .include(dependency("org.junit.platform",
                                 "junit-platform-console-standalone",
-                                version(1,9,3)));
+                                version(1,10,0)));
     }
 
     public static void main(String[] args) {
