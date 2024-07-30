@@ -11,7 +11,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta property="og:locale" content="en_US"/>
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{{v webapp:rootUrl/}}images/og-bld2.png?{{v context:paramRandom/}}">
+    <meta property="og:image" content="{{v webapp:rootUrl/}}images/og-bld3.png?{{v context:paramRandom/}}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="twitter:card" content="summary_large_image">
@@ -19,7 +19,7 @@
     <meta property="twitter:site" content="@gbevin">
     <meta property="twitter:title" content="bld - pure Java build tool">
     <meta property="twitter:description" content="bld is a new build system that allows you to write your build logic in pure Java, significantly reducing the cognitive load and making it easier to reason about your build.">
-    <meta property="twitter:image" content="{{v webapp:rootUrl/}}images/og-bld2.png?{{v context:paramRandom/}}">
+    <meta property="twitter:image" content="{{v webapp:rootUrl/}}images/og-bld3.png?{{v context:paramRandom/}}">
     <meta name="generator" content="RIFE2">
     <!--v head_section/-->
 </head>
@@ -86,6 +86,29 @@
     </table>
 
     <p>Writing your build logic in the same language as your application (Java), significantly reduces the cognitive load, and taking actions immediately without having to mentally construct a described plan, makes it easier to reason about your build.</p>
+
+    <h1>IDE support</h1>
+
+    <p><a href="https://github.com/rife2/bld-idea"><img src="images/bld-idea.png" style="width: 100%"></a></p>
+
+    <p>Since version 2.0, bld comes with its own <a href="https://github.com/rife2/bld-idea">IntelliJ IDEA plugin</a>:</p>
+
+    <ul>
+        <li>detect bld projects and find their main Java class</li>
+        <li>quick access to open and edit the main Java class and wrapper properties of bld projects</li>
+        <li>list all the commands in bld projects in a side panel</li>
+        <li>execute one or multiple commands in the order they were selected</li>
+        <li>reload the commands in the bld project</li>
+        <li>terminate currently running bld commands</li>
+        <li>bld console panel for command output with source code hyperlinking</li>
+        <li>display the bld dependency tree</li>
+        <li>toggle to run bld in offline or online mode</li>
+        <li>auto-save all open files before executing a bld command</li>
+        <li>convenient bld one-click cache invalidation</li>
+        <li>set bld commands to run before or after IDEA compilation</li>
+        <li>create custom bld command run configuration</li>
+        <li>assign keyboard shortcuts to bld commands</li>
+    </ul>
 
     <h1>Find out more</h1>
 
