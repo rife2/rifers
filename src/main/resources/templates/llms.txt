@@ -10,7 +10,7 @@ RIFE2 is designed to be understood statically. Routes are fields, elements are c
 - [Project on GitHub](https://github.com/rife2/rife2): source, issues and releases
 - [Documentation wiki](https://github.com/rife2/rife2/wiki): the full feature reference
 - [Javadocs](https://rife2.github.io/rife2/): the complete API reference for every class, method and annotation
-- [Live examples](https://rife2.com): minimal, runnable demos of each feature, each linking to its own source
+- [Live examples](https://rife2.com): minimal, runnable feature demos, each linking to its own source
 
 ## Web engine
 - [Site](https://github.com/rife2/rife2/wiki/Site): the application entry point, where the site's routes are declared
