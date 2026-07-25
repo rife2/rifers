@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live workflow engine demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/prism.css?{{v context:paramRandom/}}">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/prism.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/site.js?{{v context:paramRandom/}}" defer></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#workflow">Back to RIFE2</a></p>
+    <h1>Workflow Engine</h1>
+    <p>Coordinate concurrent tasks without managing threads, locks or queues. A warehouse, a courier and a notifier each run as plain, sequential Java that <em>pauses</em> on an event and resumes when the previous step informs it, all held together by RIFE2's continuations. Place an order and watch the three tasks wake up in turn and hand the parcel down the line.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage demo-wf">
+        <button class="demo-wf-place" type="button"
+                hx-get="{{v place_url/}}" hx-target="#demo-wf-feed" hx-swap="afterbegin">Place an order</button>
+        <div class="demo-tpl-panel">
+            <div class="demo-tpl-label">warehouse, courier and notifier, each an independent task</div>
+            <div id="demo-wf-feed" class="demo-wf-feed">
+                <p class="demo-wf-empty">Your fulfillment log is empty. Place an order to set the three tasks in motion.</p>
+            </div>
+        </div>
+    </div>
+<!--/bv-->
+    <p class="demo-note">No callbacks and no shared state: each task reads top to bottom, and <code>pauseForEvent</code> suspends it mid-method until the previous step responds. Every order runs its own workflow to completion inside one request.</p>
+</main>
+</body>
+</html>
+<!--b order_card--><div class="demo-wf-order">
+    <div class="demo-wf-order-head"><span class="demo-wf-order-no">Order #{{v order_no/}}</span> {{v product/}}</div>
+    <div class="demo-wf-trace"><!--v trace/--></div>
+</div><!--/b-->
+<!--b trace_row--><div class="demo-wf-row demo-wf-{{v who/}}" style="--d:{{v delay/}}"><span class="demo-wf-who">{{v who_label/}}</span> <!--v message/--></div><!--/b-->

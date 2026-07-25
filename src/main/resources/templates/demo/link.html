@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live type-safe links demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#type-safe-links">Back to RIFE2</a></p>
+    <h1>Type-Safe Links</h1>
+    <p>The URL below was generated from the route by <code>c.urlFor(hello)</code>, with no string literals, so it survives renaming and refactoring. Click the link to follow it.</p>
+    <!--v stage/-->
+    <p class="demo-note">The link and its URL are both generated from the same route field.</p>
+</main>
+</body>
+</html>
+<!--bv stage-->
+    <div class="demo-stage">
+        <a class="demo-btn" href="{{v url/}}"
+           hx-get="{{v url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">Hello</a>
+        <p class="demo-url"><code>{{v url/}}</code></p>
+    </div>
+<!--/bv-->

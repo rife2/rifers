@@ -1,29 +1,69 @@
-<!--bv meta_section-->
-<meta charset="UTF-8">
-<title>RIFE2 Framework : Full-stack, no-declaration, framework to quickly and effortlessly create web applications with modern Java.</title>
+<!--bv page_head-->
+<title>{{v page_title/}}</title>
+<link rel="icon" type="image/svg+xml" href="{{v webapp:rootUrl/}}images/favicon.svg">
+<meta name="description" content="{{v page_description/}}">
 <meta content="width=device-width, initial-scale=1" name="viewport">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="canonical" href="{{v page_url/}}">
+<meta property="og:title" content="{{v page_title/}}">
+<meta property="og:description" content="{{v page_description/}}">
+<meta property="og:url" content="{{v page_url/}}"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:type" content="website">
-<meta property="og:image" content="{{v webapp:rootUrl/}}images/og-rife2.png?{{v context:paramRandom/}}">
+<meta property="og:image" content="{{v webapp:rootUrl/}}images/{{v og_image/}}?{{v context:paramRandom/}}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:creator" content="@gbevin">
 <meta property="twitter:site" content="@gbevin">
-<meta property="twitter:title" content="RIFE2 Java Framework | RIFE is back!">
-<meta property="twitter:description" content="RIFE2 is a full-stack, no-declaration, framework to quickly and effortlessly create web applications with modern Java.">
-<meta property="twitter:image" content="{{v webapp:rootUrl/}}images/og-rife2.png?{{v context:paramRandom/}}">
+<meta property="twitter:title" content="{{v page_title/}}">
+<meta property="twitter:description" content="{{v page_description/}}">
+<meta property="twitter:image" content="{{v webapp:rootUrl/}}images/{{v og_image/}}?{{v context:paramRandom/}}">
 <meta name="generator" content="RIFE2">
 <!--/bv-->
+<!--bv nav-->
+<nav class="nav">
+    <a href="{{v route:home/}}"{{v nav_active_home}}{{/v}}>RIFE2</a>
+    <a href="{{v route:bld/}}"{{v nav_active_bld}}{{/v}}>bld</a>
+    <a href="{{v nav_docs/}}">Docs</a>
+    <a href="{{v nav_github/}}">GitHub</a>
+</nav>
+<!--/bv-->
+<!--bv nav_active--> class="active" aria-current="page"<!--/bv-->
 <!--bv head_section-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
   <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/prism.css?{{v context:paramRandom/}}">
   <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
   <!-- Created with the RIFE2 Java full-stack web framework - https://rife2.com -->
 <!--/bv-->
 <!--bv footer-->
-<div class="powered"><a href="https://rife2.com"><img src="images/rife2_powered.svg" class="powered"></a></div>
+<footer class="site-footer">
+    <nav class="footer-links">
+        <div>
+            <h3>RIFE2</h3>
+            <a href="{{v route:home/}}">Home</a>
+            <a href="https://github.com/rife2/rife2">GitHub</a>
+            <a href="https://github.com/rife2/rife2/wiki">Documentation</a>
+            <a href="https://discord.gg/DZRYPtkb6J">Discord</a>
+        </div>
+        <div>
+            <h3>bld</h3>
+            <a href="{{v route:bld/}}">Home</a>
+            <a href="https://github.com/rife2/bld">GitHub</a>
+            <a href="https://github.com/rife2/bld/wiki">Documentation</a>
+            <a href="https://discord.gg/zDG6anEXQX">Discord</a>
+        </div>
+        <div>
+            <h3>Community</h3>
+            <a href="https://forum.uwyn.com">Forums</a>
+            <a href="https://github.com/rife2">All projects</a>
+            <a href="https://uwyn.com">Uwyn</a>
+        </div>
+    </nav>
+    <div class="powered"><a href="https://rife2.com"><img src="images/rife2_powered.svg" class="powered" alt="Powered by RIFE2" loading="lazy"></a></div>
+    <p class="site-source">This site is itself a RIFE2 application built with bld. <a href="https://github.com/rife2/rifers">Browse its full source on GitHub</a> to see everything on these pages, including the live demos.</p>
+    <p class="copyright">Created by Geert Bevin · RIFE2 and bld are open source under the Apache 2.0 license</p>
+</footer>
 <!--/bv-->

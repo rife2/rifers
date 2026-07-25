@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live htmx demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#htmx">Back to RIFE2</a></p>
+    <h1>htmx</h1>
+    <p>One element answers both a browser and htmx. A normal request gets the whole page, and each keystroke below is an htmx request that gets back only the updated list, served straight from a template block. No client-side rendering, no JSON, no <code>hx-select</code>.</p>
+    <!--v stage/-->
+    <p class="demo-note">The list is a named block. <code>printHtmxFragment</code> sends the whole stage on the first load and the full page on a direct visit, while each search sends back only the block that changed.</p>
+</main>
+</body>
+</html>
+<!--bv stage-->
+    <div class="demo-stage">
+        <input class="demo-htmx-search" type="text" name="q" value="{{v q/}}"
+               placeholder="Filter the list, try r or s" aria-label="filter the list"
+               autocomplete="off"
+               hx-get="{{v run_url/}}" hx-trigger="keyup changed delay:200ms"
+               hx-target="next .demo-htmx-list" hx-swap="innerHTML">
+        <ul class="demo-htmx-list"><!--v rows/--></ul>
+    </div>
+<!--/bv-->
+<!--b rows_fragment--><!--v rows/--><!--/b-->
+<!--b row--><li class="demo-htmx-item"><!--v language/--></li><!--/b-->
+<!--b no_match--><li class="demo-htmx-empty">no matches</li><!--/b-->

@@ -2,99 +2,347 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="RIFE2 Java Framework | RIFE is back!">
-    <meta property="og:description"
-          content="RIFE2 is a full-stack, no-declaration, framework to quickly and effortlessly create web applications with modern Java.">
-    <meta property="og:url" content="https://rife2.com"/>
-    <!--v meta_section/-->
+    <meta name="htmx-config" content='{"ignoreTitle":true}'>
+    <!--v page_head/-->
     <!--v head_section/-->
 </head>
 <!--i common/-->
 
 <body>
-<script src="js/prism.js"></script>
+<script src="js/prism.js?{{v context:paramRandom/}}"></script>
+<script src="js/htmx.min.js?{{v context:paramRandom/}}"></script>
+<script src="js/htmx-ext-sse.js?{{v context:paramRandom/}}"></script>
+<script src="js/site.js?{{v context:paramRandom/}}" defer></script>
 
-<a id="fork-me" href="https://github.com/rife2/rife2">
-    <img style="position:fixed;top:0;right:0;border:0;z-index:99999"
-         src="data:image/png;base64,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"
-         alt="Fork me on GitHub">
-</a>
+<header class="header">
+    <div class="logo"><img src="images/logo.svg" alt="RIFE2"></div>
+    <h1 class="pitch">A full-stack framework to effortlessly<br>create web applications with modern Java</h1>
+    <!--v nav/-->
+</header>
 
-<div class="header">
-    <div class="logo"><img src="images/logo.svg"></div>
-    <div class="pitch">A full-stack framework to effortlessly<br>create web applications with modern Java</div>
-</div>
+<section class="hero">
+    <div class="os-switch" role="tablist" aria-label="Operating system">
+        <button type="button" role="tab" id="os-tab-unix" aria-controls="os-unix" aria-selected="true" data-os="unix">macOS / Linux</button>
+        <button type="button" role="tab" id="os-tab-windows" aria-controls="os-windows" aria-selected="false" tabindex="-1" data-os="windows">Windows</button>
+    </div>
+    <div class="os-panel" id="os-unix" role="tabpanel" aria-labelledby="os-tab-unix" data-os="unix">
+        <div class="install">
+            <code>bash -c "$(curl -fsSL https://rife2.com/create.sh)"</code>
+            <button class="copy" type="button" aria-label="Copy command">Copy</button>
+        </div>
+        <p class="hero-meta">Java 17+ &nbsp;·&nbsp; no install needed &nbsp;·&nbsp; <code>cd</code> into the app and <code>./bld compile run</code></p>
+    </div>
+    <div class="os-panel" id="os-windows" role="tabpanel" aria-labelledby="os-tab-windows" data-os="windows" hidden>
+        <div class="install">
+            <code>irm https://rife2.com/create.ps1 | iex</code>
+            <button class="copy" type="button" aria-label="Copy command">Copy</button>
+        </div>
+        <p class="hero-meta">Java 17+ &nbsp;·&nbsp; no install needed &nbsp;·&nbsp; <code>cd</code> into the app and <code>bld.bat compile run</code></p>
+    </div>
+</section>
 
-<div class="content">
-    <h1>Welcome</h1>
-    <p>RIFE2 is built on the foundations of the original RIFE framework that was popular from 2002-2010. Since then, the world and Java have changed and many of
-        the original RIFE APIs could finally be replaced with pure Java, no-XML, no-YAML, leaving only type-safe expressive code.</p>
-    <p>RIFE2 preserves most of the original features and adds new ones, for a fraction of the footprint and with even greater developer productivity than
-        before. RIFE2 was created by me, Geert Bevin, veteran Java coder and one of the first Java Champions.</p>
-    <p class="links">
-        <a href="https://forum.uwyn.com">Join the Community Forums</a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://discord.gg/DZRYPtkb6J">Chat on Discord</a>
-    </p>
-    <h1>Quickstart</h1>
-    <div>
-        <p class="caption">Fully Functional Web Application</p>
-        <pre data-src="{{v webapp:rootUrl/}}examples/HelloWorld.java"></pre>
-    </div>
-    <div>
-        <p class="caption">Out-of-Container Test</p>
-        <pre data-src="{{v webapp:rootUrl/}}examples/HelloWorldTest.java"></pre>
-    </div>
-    <div>
-        <p class="caption">Run It!</p>
-        <pre><code class="language-bash">./bld compile run      # using the bld build tool</code></pre>
-        <pre><code class="language-bash">./gradlew compile run  # using the Gradle build tool</code></pre>
-    </div>
-    <div>
-        <p class="caption">View It!</p>
-        <pre><code class="language-url">http://localhost:8080/hello</code></pre>
+<main class="content">
+    <p class="intro">RIFE2 is a full-stack framework for building web applications in plain, type-safe Java.</p>
+    <p class="intro">Routing, templates, forms, persistence and tests are all ordinary Java code, with no XML, YAML or reflection magic. The compiler and your IDE understand your whole application, giving you completion, refactoring, navigation and type checking everywhere.</p>
+    <h2>See RIFE2 in action</h2>
+    <p>Each tab is a small, focused example. <em>Try it live</em> runs an interactive playground, served by this site, that exercises it, and every playground links to its own source.</p>
+    <div class="examples">
+        <div class="example-tabs" role="tablist" aria-label="RIFE2 examples">
+            <button type="button" role="tab" aria-selected="true">Hello World</button>
+            <button type="button" role="tab" aria-selected="false">Type-Safe Links</button>
+            <button type="button" role="tab" aria-selected="false">Forms</button>
+            <button type="button" role="tab" aria-selected="false">Validation</button>
+            <button type="button" role="tab" aria-selected="false">CSRF</button>
+            <button type="button" role="tab" aria-selected="false">JSON</button>
+            <button type="button" role="tab" aria-selected="false">Templates</button>
+            <button type="button" role="tab" aria-selected="false">htmx</button>
+            <button type="button" role="tab" aria-selected="false">Continuations</button>
+            <button type="button" role="tab" aria-selected="false">SSE</button>
+            <button type="button" role="tab" aria-selected="false">Workflow</button>
+            <button type="button" role="tab" aria-selected="false">Migrations</button>
+            <button type="button" role="tab" aria-selected="false">Query Builders</button>
+            <button type="button" role="tab" aria-selected="false">Query Manager</button>
+            <button type="button" role="tab" aria-selected="false">Testing</button>
+        </div>
+        <div role="tabpanel">
+            <p class="caption">A fully functional web application in a dozen lines</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloWorld.java"></pre>
+            <p class="caption">Run It!</p>
+            <pre><code class="language-bash">./bld compile run      # using the bld build tool</code></pre>
+            <pre><code class="language-bash">./gradlew compile run  # using the Gradle build tool</code></pre>
+            <p class="caption">View It!</p>
+            <pre><code class="language-url">http://localhost:8080/hello</code></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.hello/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Served live by rife2.com, which is itself a RIFE2 app.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/hello.html">and its template: hello.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Routes are fields, so links and URLs are type-safe and survive refactoring</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloLink.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.link/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">The link's URL is generated from the route. Click it and Hello World appears.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/link.html">and its template: link.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">One template, one route: GET shows the form, POST shows the result</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloForm.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.form/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">One element serves both the GET that shows the form and the POST that shows the result.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/FormDemo.java">View the source: FormDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/form.html">and its template: form.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Validation rules live on the bean, and RIFE2 checks every field server-side</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloValidation.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.validation/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Submit the form and each field that breaks its constraints gets a precise error. Try an empty name, a bad email, or an age like 5. The rules can also live in a separate metadata class, keeping the bean a plain POJO.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/ValidationDemo.java">View the source: ValidationDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/validation.html">and its template: validation.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">A CSRF token guards every state-changing request, so other sites can't forge them</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloCsrf.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.csrf/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">The real verification runs out of container. A legitimate submit is accepted, a forged cross-site request gets 403.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/CsrfDemo.java">View the source: CsrfDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/csrf.html">and its template: csrf.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Beans and records convert to and from JSON, without annotations or dependencies</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloJson.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live">
+                    <div class="demo-stage demo-json-live" data-endpoint="{{v route:.demos.json/}}">
+                        <form class="demo-tpl-form" onsubmit="return false">
+                            <label class="demo-tpl-field">Name
+                                <input type="text" name="name" value="world" autocomplete="off" aria-label="name for the greeting">
+                            </label>
+                        </form>
+                        <div class="demo-tpl-panel">
+                            <div class="demo-tpl-label">the request</div>
+                            <pre class="demo-tpl-src"><code class="demo-json-req"></code></pre>
+                        </div>
+                        <div class="demo-tpl-panel">
+                            <div class="demo-tpl-label">the response <span class="demo-json-ct"></span></div>
+                            <pre class="demo-tpl-src"><code class="demo-json"></code></pre>
+                        </div>
+                    </div>
+                </div>
+                <p class="demo-note">Change the name and the live JSON API answers. The record's fields become the keys, with no annotations. This calls the running endpoint and shows exactly what it returns.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/JsonDemo.java">View the source: JsonDemo.java</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Templates are plain files with no embedded logic or expressions (HTML here, also XML, text, JSON and more): named blocks are the pieces, and Java assembles them. Open the live demo and the branch that runs for the current state lights up here.</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloTemplate.java"></pre>
+            <details class="demo-inline" data-highlight-field="state" data-highlight-welcome="18" data-highlight-dashboard="9-16">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.templates/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">The same logic-less template renders both pages, and the highlighted lines above are the Java branch that just ran. Flip the state and only the Java's choice of block changes.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/TemplatesDemo.java">View the source: TemplatesDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/templates.html">and its template: templates.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">One element serves a browser the whole page and htmx just the changed fragment, with no client-side rendering code</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloHtmx.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.htmx/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Type to filter: each keystroke fetches only the updated list, returned with <code>printHtmxFragment</code> from a template block rather than as a whole page.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/HtmxDemo.java">View the source: HtmxDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/htmx.html">and its template: htmx.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">A local variable preserved across requests, resuming exactly where it paused</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/Counter.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.counter/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Every visitor gets their own counter.
+                    <a href="{{v route:.demos.counter/}}" target="_blank" rel="noopener">Open in its own tab</a> and it counts independently.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/CounterDemo.java">View the source: CounterDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/counter.html">and its template: counter.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Server-sent events with broadcasters that push to every connected client from anywhere</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloSse.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.sse/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">The clock is pushed once per second, and every tap is broadcast to all watchers.
+                    <a href="{{v route:.demos.sse/}}" target="_blank" rel="noopener">Open in its own tab</a>, tap in one, and watch both jump.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/sse.html">and its template: sse.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Coordinate concurrent tasks as straight-line code that pauses on events, without managing threads or locks</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloWorkflow.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.workflow/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">A warehouse, a courier and a notifier hand a parcel down the line, each written top to bottom and suspended mid-method by <code>pauseForEvent</code>. Place an order and it runs its own workflow to completion in one request.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/WorkflowDemo.java">View the source: WorkflowDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/workflow.html">and its template: workflow.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Versioned schema evolution with declarative, reversible migrations</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloMigrations.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.migrations/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Step up and back to watch the real schema change. Each step runs against its own throwaway database.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/MigrationsDemo.java">View the source: MigrationsDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/migrations.html">and its template: migrations.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">SQL queries built through a Java API, rendered in each database's own dialect</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloQueries.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.queries/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Pick a database and only the generated SQL changes. One type-safe query, tailored to each dialect, and RIFE2 even rejects a clause a database can't run.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/QueriesDemo.java">View the source: QueriesDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/queries.html">and its template: queries.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">The manager derives the table from a plain bean, then saves and restores rows with no SQL</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/HelloGqm.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.gqm/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">Add a book and the manager saves it and reads it straight back. Each request runs against its own private in-memory database that is discarded afterward, so nothing accumulates between requests.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/GqmDemo.java">View the source: GqmDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/gqm.html">and its template: gqm.html</a></p>
+            </details>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">Out-of-container tests drive forms and links like a browser, with no running server</p>
+            <pre data-src="{{v webapp:rootUrl/}}examples/GreeterTest.java"></pre>
+            <details class="demo-inline">
+                <summary class="demo-toggle">Try it live</summary>
+                <div class="demo-live" hx-get="{{v route:.demos.test/}}"
+                     hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
+                <p class="demo-note">The test finds the form in the HTML, fills it, and submits it, all in-process. Change the expected value to make it fail.
+                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/TestDemo.java">View the source: TestDemo.java</a>
+                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/test.html">and its template: test.html</a></p>
+            </details>
+        </div>
     </div>
 
-    <h1>Just the beginning</h1>
-    <p>While the example above is a fully functional web application, it barely scratches the surface of what RIFE2 is capable of.
-        The full stack design of RIFE2 provides smart integrations across layers, focusing on pragmatic decisions that prioritize developer productivity and
-        code maintainability. These are some of the features:</p>
+    <h2>Just the beginning</h2>
+    <p>While the examples above each run live on this page, they show only a small part of what RIFE2 offers, and
+        its layers are built to work together.</p>
+    <p>These are some of the features:</p>
 
     <p class="cards">
-        <a class="card" href="https://github.com/rife2/rife2/wiki">Full Stack in 2MB</a>
+        <a class="card" href="https://github.com/rife2/rife2/wiki">Full Stack in 2.5MB</a>
         <a class="card" href="https://github.com/rife2/rife2#quickstart">No Dependencies</a>
         <a class="card" href="https://github.com/rife2/rife2/wiki/Continuations">Web Continuations</a>
         <a class="card" href="https://github.com/rife2/rife2/wiki/Bidirectional-Templates">Bidirectional Templates</a>
-        <a class="card" href="https://github.com/rife2/rife2/wiki/Content-Management-Framework">Content Management</a>
+        <a class="card" href="#sse">Server-Sent Events</a>
         <a class="card" href="{{v route:bld/}}">Pure Java Build System</a>
     </p>
 
     <div class="features">
-        <ul>
-            <li>Web Engine with Continuations</li>
-            <li>Out-of-container Testing</li>
-            <li>Bidirectional and Logic-less Template Engine</li>
-            <li>Database Engine with Query Builders</li>
-            <li>Bean-centric Metadata with Constraints</li>
-            <li>Optional Embedded Jetty or Tomcat Web Server</li>
-            <li>Hierarchical Properties for Cascaded Configuration</li>
-            <li>Form Building</li>
-            <li>Dynamic Validation</li>
-            <li>Content Management Framework</li>
-            <li>Fully Customizable Authentication</li>
-            <li>Dependency Injection</li>
-            <li>Persisted Cron-Like Scheduler</li>
-            <li>WebJars Support</li>
-            <li>Resource Abstraction</li>
-            <li>Workflow Engine with Continuations</li>
-            <li>Localization Support</li>
-            <li>RSS, Atom and JSON Feed Generation</li>
-            <li>GraalVM Native Compilation Support</li>
-            <li>IntelliJ IDEA Plugin</li>
-            <li>Gradle Plugin</li>
-            <li>No Dependencies and Only a 2MB Jar</li>
-            <li>Integrated Pure Java Build System</li>
-            <li>And more ...</li>
-        </ul>
+        <div class="feature-col">
+            <div class="feature-group">
+                <h3>Web</h3>
+                <ul>
+                    <li>Engine with Continuations</li>
+                    <li>Clean-URL Path Mapping</li>
+                    <li>Out-of-container Testing</li>
+                    <li>Form Building</li>
+                    <li>Dynamic Validation</li>
+                    <li>Server-Sent Events with Replay</li>
+                    <li>htmx Integration</li>
+                    <li>Customizable Authentication</li>
+                    <li>CSRF Protection</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <h3>Runtime &amp; Deployment</h3>
+                <ul>
+                    <li>Embedded Jetty or Tomcat</li>
+                    <li>Virtual Threads by Default</li>
+                    <li>Jakarta EE 10/11 War Deployment</li>
+                    <li>GraalVM Native Images with Continuations</li>
+                    <li>Explicit Java Module</li>
+                    <li>Hierarchical Configuration</li>
+                    <li>Persisted Scheduler</li>
+                    <li>Dependency Injection</li>
+                    <li>Workflow Engine with Continuations</li>
+                </ul>
+            </div>
+        </div>
+        <div class="feature-col">
+            <div class="feature-group">
+                <h3>Data</h3>
+                <ul>
+                    <li>Database Query Builders</li>
+                    <li>Generic Query Manager</li>
+                    <li>Declarative Migrations</li>
+                    <li>Bean-centric Metadata and Constraints</li>
+                    <li>JSON with Bean Conversion</li>
+                    <li>Content Management</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <h3>Templates &amp; Content</h3>
+                <ul>
+                    <li>Bidirectional Logic-less Templates</li>
+                    <li>Localization</li>
+                    <li>RSS, Atom and JSON Feeds</li>
+                    <li>WebJars</li>
+                    <li>Resource Abstraction</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <h3>Tooling</h3>
+                <ul>
+                    <li>Pure Java Build System (bld)</li>
+                    <li>IntelliJ IDEA Plugin</li>
+                    <li>Gradle Plugin</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <p class="links">
@@ -103,21 +351,38 @@
         <a href="{{v route:bld/}}">Learn more about bld</a>&nbsp;&nbsp;&nbsp;&nbsp;
     </p>
 
-    <h1>Find out more</h1>
+    <h2>Virtual threads by default</h2>
+    <p>On Java 21 and later, RIFE2's embedded server runs every request on its own virtual thread, with
+        no configuration. You write ordinary blocking code: a database query, an HTTP call or a file
+        read, parks only that thread instead of tying up a pooled request thread. There is no
+        reactive API and no async plumbing to learn, and blocking code can scale to many concurrent
+        I/O-bound requests because virtual threads are cheap to create and park. When deployed to an external servlet
+        container, RIFE2 leaves request threading to the container. Either way, it fits the rest of RIFE2, which offers
+        the same sequential model:
+        continuations pause and resume a flow across requests, and the workflow engine coordinates concurrent tasks
+        as straight-line code that waits on events.</p>
+
+    <h2>Built for AI-assisted development</h2>
+    <p>RIFE2's design suits AI coding assistants. Everything is plain, type-safe Java: no XML or YAML, no
+        required annotations, and no reflection magic, so the compiler and the agent both read the application's
+        structure straight from the source. Nothing is hidden: routes are fields, elements are classes, and templates
+        are files, all discoverable by reading the code. The framework is a single 2.5MB jar with zero dependencies,
+        built by <a href="{{v route:bld/}}">bld</a> in plain Java, so there is less machinery to reverse
+        engineer. Out-of-container tests exercise the whole request cycle in memory for a fast compile-and-test loop,
+        and an <a href="{{v route:llms/}}">llms.txt</a> at the site root gives agents an index of the framework's
+        documentation.</p>
+
+    <h2>Find out more</h2>
     <p>RIFE2's source code, community and issues can be found on GitHub:<br>
         <a href="https://github.com/rife2/rife2">https://github.com/rife2/rife2</a></p>
 
-    <h1>Some people using RIFE2</h1>
-    <p class="users">
-        <a href="https://moogmusic.com" target="_blank"><img src="images/moog.svg"></a>
-        <a href="https://uwyn.com" target="_blank"><img src="images/uwyn.svg"></a>
-        <a href="https://dynamod.games" target="_blank"><img src="images/dynamod.svg"></a>
-        <a href="https://dataswift.io" target="_blank"><img src="images/dataswift.svg"></a>
-        <a href="https://erik.thauvin.net/blog/" target="_blank"><img src="images/erik_weblog.svg"></a>
-    </p>
+    <h2>About RIFE2</h2>
+    <p>RIFE2 builds on the foundations of the original RIFE framework that was popular from 2002 to 2010. It preserves most of the original features and adds new
+        ones, for a fraction of the footprint and with even greater developer productivity. RIFE2 is created and maintained by Geert Bevin, veteran Java coder
+        and one of the first Java Champions.</p>
+</main>
 
-    <!--v footer--><!--/v-->
-</div>
+<!--v footer--><!--/v-->
 
 </body>
 </html>

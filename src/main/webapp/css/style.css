@@ -1,26 +1,43 @@
 :root {
     /* colors */
     --main-background-color: #0d0d0d;
-    --code-background-color: #242424;
+    --code-background-color: #232329;
+    /* the live demo surface sits a touch lighter than code blocks, so a
+       "Try it live" playground reads as its own interactive surface */
+    --demo-background-color: #2a2a31;
     --main-text-color: #d0d0d0;
     --cards-background-color: #e0e0e0;
     --cards-text-color: #0d0d0d;
     --cards-hover-background-color: #3c9efc;
     --cards-hover-text-color: #ffffff;
+    --accent-color: #6caaff;
+    --accent-hover-color: #8fc3ff;
+    --button-hover-background-color: #2b8ef0;
+    /* the raised dark surface shared by the header, inputs, rows and panels */
+    --raised-background-color: #1a1a1c;
+
+    /* fonts */
+    --mono-font: 'JetBrains Mono', Consolas, Monaco, monospace;
 
     /* borders */
-    --table-border: 1px solid #242424;
+    --table-border: 1px solid #232329;
+    --control-border-color: #3a3a3a;
+
+    /* corner radii: one for surfaces (stages, code blocks, panels), one for
+       controls (inputs, buttons, chips), so every rounded box stays in sync */
+    --radius: 8px;
+    --radius-control: 5px;
 
     /* widths */
-    --card-width: 240px;
-    --content-width: 720px;
+    --content-width: min(720px, 90vw);
 }
 body {
     background: var(--main-background-color);
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
     color: var(--main-text-color);
     font-size: 18px;
+    line-height: 1.6;
     margin: 0;
     padding: 0 0 2em 0;
 }
@@ -29,57 +46,243 @@ code[class*=language-], pre[class*=language-] {
     font-family: 'JetBrains Mono',Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;
     font-variant-ligatures: none;
     background-color: var(--code-background-color);
+    border-radius: var(--radius);
+}
+/* inline code in prose: monospace reads larger than the surrounding text at the
+   same point size, so scale it down relative to whatever context it sits in.
+   Scoped away from anything inside a <pre>, and low specificity keeps the sized
+   demo snippets untouched. */
+:not(pre) > code {
+    font-size: 0.85em;
+}
+/* Prism line-highlight: mark the lines of an example a live demo calls out */
+pre[data-line] {
+    position: relative;
+}
+.line-highlight {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 1em;
+    background: rgba(108, 170, 255, 0.11);
+    box-shadow: inset 2px 0 0 var(--accent-color);
+    pointer-events: none;
+    line-height: inherit;
+    white-space: pre;
+}
+.line-highlight:before,
+.line-highlight[data-end]:after {
+    content: none;
 }
 .token.function {
     color: #ffa267;
 }
 .token.keyword  {
-    color: #6caaff;
+    color: var(--accent-color);
 }
 a, a:visited {
-    color: #d0d0d0;
+    color: var(--accent-color);
     text-underline-offset: 4px;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--accent-hover-color);
+}
+/* a single, consistent keyboard-focus ring for every interactive control,
+   tuned for the dark background; only shows for keyboard users */
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 .header {
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 10;
-    background: #171717;
+    background: var(--raised-background-color);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     margin: 0;
     padding: 1em 0 1.5em 0;
     border-bottom: black solid 1px;
+    transition: padding 0.3s ease;
 }
 .logo {
     flex-grow: 0;
     width: 200px;
+    transition: width 0.3s ease;
 }
-div.powered {
-    margin-top: 2em;
-    text-align: center;
-}
-img.powered {
-    width: 140px;
+.logo img, .bld-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 .bld-logo {
     flex-grow: 0;
     width: 96px;
+    transition: width 0.3s ease;
+}
+.header.compact {
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+.header.compact .logo {
+    width: 120px;
+}
+.header.compact .bld-logo {
+    width: 56px;
+}
+.header.compact .pitch {
+    display: none;
 }
 .pitch {
     flex-grow: 0;
-    margin: 1em 0 6px 2em;
+    /* the last line's bottom sits on the bottom of the logo's letters: the images
+       are display:block, so no margin is needed to offset an inline descender gap
+       and the alignment holds at every pitch font size */
+    margin: 1em 0 0 2em;
     font-size: 22px;
+    font-weight: 400;
     line-height: 120%;
     font-style: italic;
     text-justify: auto;
-    white-space: nowrap;
+    transition: font-size 0.3s ease, margin 0.3s ease;
+}
+.nav {
+    position: absolute;
+    top: 1em;
+    right: 1.5em;
+    display: flex;
+    gap: 1.25em;
+    font-size: 15px;
+}
+.nav a, .nav a:visited {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.nav a:hover {
+    color: #ffffff;
+}
+.nav a.active {
+    color: #f1f1f1;
 }
 .caption {
     color: #eeeeee;
     font-weight: 300;
+}
+.examples, .examples [role=tabpanel], .content .examples pre {
+    width: var(--content-width);
+    max-width: var(--content-width);
+    box-sizing: border-box;
+}
+.examples {
+    scroll-margin-top: 90px;
+}
+.examples pre {
+    overflow-x: auto;
+}
+.example-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.5em;
+    margin-top: 1em;
+    border-bottom: 1px solid #2a2a2a;
+}
+.example-tabs [role=tab] {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    color: #aaa;
+    padding: 0.4em 0.1em;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.example-tabs [role=tab]:hover {
+    color: #ffffff;
+}
+.example-tabs [role=tab][aria-selected=true] {
+    color: #f1f1f1;
+    border-bottom-color: var(--accent-color);
+}
+.hero {
+    text-align: center;
+    margin: 2.5em 1em 0 1em;
+}
+/* an explicit display would otherwise win over the browser's hiding */
+[hidden] {
+    display: none !important;
+}
+.os-switch {
+    display: flex;
+    justify-content: center;
+    gap: 0.4em;
+    margin-bottom: 1em;
+}
+.os-switch button {
+    background: none;
+    border: none;
+    border-radius: var(--radius-control);
+    padding: 0.3em 0.9em;
+    font-family: inherit;
+    font-size: 14px;
+    color: #8a8a8a;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.os-switch button:hover {
+    color: #ffffff;
+}
+.os-switch button[aria-selected="true"] {
+    background: var(--raised-background-color);
+    color: #ffffff;
+}
+.install {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2em;
+    background: var(--code-background-color);
+    border-radius: var(--radius);
+    padding: 0.7em 0.9em 0.7em 1.3em;
+}
+.install code {
+    font-family: var(--mono-font);
+    font-size: 16px;
+    color: #eeeeee;
+    white-space: nowrap;
+}
+.install code::before {
+    content: "$ ";
+    color: #8a8a8a;
+}
+.install .copy {
+    background: #3a3a3a;
+    color: #dddddd;
+    border: none;
+    border-radius: var(--radius-control);
+    padding: 0.35em 0.9em;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.install .copy:hover {
+    background: var(--cards-hover-background-color);
+    color: #ffffff;
+}
+.hero-meta {
+    margin-top: 0.8em;
+    font-size: 15px;
+    color: #aaa;
+    text-wrap: balance;
+}
+.intro {
+    font-size: 17px;
+    color: #e6e6e6;
 }
 .content {
     margin: 1em 2em;
@@ -88,59 +291,30 @@ img.powered {
     align-items: center;
     gap: 1em;
 }
-.content div {
+/* only the direct column items take the content width; scoping to the child
+   combinator keeps the width off nested divs (demo stages, cards, panels) that
+   should just fit their own container */
+.content > div {
     min-width: var(--content-width);
     flex-grow: 1;
 }
-.content h1 {
+.content pre {
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+.content h2 {
     width: var(--content-width);
-    margin: 1em 0 0 0;
+    margin: 1.5em 0 0 0;
     color: #f1f1f1;
     font-size: 24px;
 }
+.content h2:first-child {
+    margin-top: 0.5em;
+}
 .content p {
     width: var(--content-width);
-    margin: 1em 0 0 0;
-}
-.users {
-    display: grid;
-    width: var(--content-width);
-    gap: 2em 3em;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "moog uwyn dynamod"
-    "dataswift dataswift erik";
-    justify-items: center;
-}
-.users a {
-    width: 100%;
-}
-.users img {
-    width: 100%;
-    opacity: 0.5;
-    border: 0;
-    transition: opacity 0.5s ease;
-    cursor: pointer;
-}
-.users a:nth-child(1) {
-    grid-area: moog;
-}
-.users a:nth-child(2) {
-    grid-area: uwyn;
-}
-.users a:nth-child(3) {
-    grid-area: dynamod;
-}
-.users a:nth-child(5) {
-    grid-area: erik;
-}
-.users a:nth-child(4) {
-    grid-area: dataswift;
-    width: 100%;
-}
-.users a img:hover {
-    opacity: 1;
-    transition: opacity 0.5s ease;
+    margin: 0.8em 0 0 0;
 }
 .links {
     font-style: italic;
@@ -148,44 +322,898 @@ img.powered {
     color: #aaa;
 }
 .links a, .links a:visited {
-    color: #6caaff;
+    color: var(--accent-color);
 }
-.features {
-    text-align: center;
+.content .features {
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+    width: var(--content-width);
+    min-width: 0;
+    flex-grow: 0;
+    text-align: left;
+    margin-top: 1em;
+}
+.content .feature-col {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+.content .feature-group {
+    min-width: 0;
+    flex-grow: 0;
+}
+.feature-group h3 {
+    margin: 0 0 0.4em 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+}
+.content .feature-group ul {
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.feature-group li {
+    margin-bottom: 0.25em;
 }
 p, ul {
     margin: 0 auto;
 }
 .content ul {
     width: var(--content-width);
+    box-sizing: border-box;
+    padding-left: 1.5em;
     display: inline-block;
     text-align: left;
-    margin: 1em auto 0 auto;
-}
-.features ul {
-    width: auto;
-    margin: 0 auto;
+    margin: 0.8em auto 0 auto;
 }
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1em;
 }
 .card {
-    font-family: sans-serif;
+    font-family: inherit;
     background: var(--cards-background-color);
     color: var(--cards-text-color) !important;
-    border-radius: 5px;
+    border-radius: var(--radius-control);
     font-weight: bold;
-    padding: 1em;
-    place-self: center;
+    font-size: 16px;
+    padding: 1em 0.5em;
     text-decoration: none;
-    width: var(--card-width);
-    align-self: center;
     text-align: center;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.demo-inline {
+    margin-top: 0.9em;
+}
+.demo-toggle {
+    display: inline-block;
+    width: fit-content;
+    font-size: 15px;
+    color: var(--accent-color);
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.3s ease;
+}
+.demo-toggle::-webkit-details-marker {
+    display: none;
+}
+.demo-toggle::before {
+    content: "\25B8";
+    display: inline-block;
+    margin-right: 0.35em;
+    transition: transform 0.2s ease;
+}
+.demo-inline[open] > .demo-toggle::before {
+    transform: rotate(90deg);
+}
+.demo-toggle:hover {
+    color: var(--accent-hover-color);
+}
+.demo-live {
+    margin-top: 0.7em;
+}
+.demo-live .demo-stage {
+    margin-top: 0;
+    padding: 1.5em;
+}
+.demo-live .demo-clock {
+    font-size: 32px;
+}
+.demo-json,
+.demo-json-req {
+    display: block;
+    font-family: var(--mono-font);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.demo-json {
+    color: #e6e6e6;
+}
+.demo-json-req {
+    color: #cfe0ff;
+}
+.demo-json-ct {
+    margin-left: 0.5em;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #6f7681;
+}
+.demo-result:not(:empty) {
+    margin-top: 1.2em;
+}
+@media (prefers-reduced-motion: reduce) {
+    .demo-toggle::before { transition: none; }
+}
+.demo {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3em 1.5em;
+}
+/* the bld configurator needs the full content width for its build file, so its
+   standalone page runs wider than the other demos and holds a .bld-config */
+.demo-wide {
+    max-width: 768px;
+}
+.demo-wide .bld-config {
+    margin: 0 auto;
+}
+.demo h1 {
+    color: #f1f1f1;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0.5em 0 0 0;
+}
+.demo p {
+    margin: 1em 0 0 0;
+}
+.demo-aside {
+    font-size: 15px;
+    color: #9a9a9a;
+}
+.demo-aside a {
+    color: var(--accent-color);
+}
+.demo-aside a:hover {
+    color: var(--accent-hover-color);
+}
+.demo-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 2em;
+    background: var(--accent-color);
+    color: #0d0d0d;
+    font-size: 14px;
+    padding: 0.7em 1.2em;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    pointer-events: none;
+    animation: demo-toast-flash 2.6s ease forwards;
+}
+@keyframes demo-toast-flash {
+    0%   { opacity: 0; transform: translate(-50%, 1.5em); }
+    8%   { opacity: 1; transform: translate(-50%, 0); }
+    88%  { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, 0.75em); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .demo-toast { animation: none; }
+}
+.demo-back a {
+    font-size: 15px;
+}
+.demo-stage {
+    margin-top: 1.5em;
+    padding: 2em 1.5em;
+    box-sizing: border-box;
+    background: var(--demo-background-color);
+    border-radius: var(--radius);
+    text-align: center;
+}
+/* the broad .content p rule sets the content width on every paragraph; inside a
+   demo stage a note should just fit the stage, so long content such as a
+   migration's column list wraps instead of spilling */
+.content .demo-stage p {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+}
+.content .demo-stage .demo-schema-table {
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+.demo-clock {
+    font-family: var(--mono-font);
+    font-size: 40px;
+    color: #f1f1f1;
+}
+.demo-note {
+    font-size: 15px;
+    color: #aaa;
+    font-style: italic;
+}
+.demo-src,
+.demo-tpl {
+    font-style: normal;
+    font-size: 13px;
+}
+/* the source and template links share one line, on their own line below the note copy */
+.demo-src::before {
+    content: "\A";
+    white-space: pre;
+}
+.demo-tpl {
+    margin-left: 1.1em;
+}
+.demo-src::after,
+.demo-tpl::after {
+    content: " \2192";
+}
+.demo-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+    justify-content: center;
+}
+.demo-form input {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 0.6em 0.9em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+}
+.demo-form button {
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0.6em 1.4em;
+    border: none;
+    border-radius: var(--radius-control);
+    background: var(--cards-hover-background-color);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.demo-form button:hover {
+    background: var(--button-hover-background-color);
+}
+.demo-counter {
+    font-family: var(--mono-font);
+    font-size: 40px;
+    color: #f1f1f1;
+    margin-bottom: 0.5em;
+}
+.demo-live .demo-counter {
+    font-size: 32px;
+}
+.demo-btn {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0.55em 1.4em;
+    border: none;
+    border-radius: var(--radius-control);
+    background: var(--cards-hover-background-color);
+    color: #ffffff !important;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.demo-btn:hover {
+    background: var(--button-hover-background-color);
+}
+.demo-done {
+    color: #aaa;
+    font-style: italic;
+    margin: 0 0 0.8em 0;
+}
+.demo-output {
+    font-family: var(--mono-font);
+    font-size: 24px;
+    color: #f1f1f1;
+}
+.demo-url {
+    margin: 1em 0 0 0;
+    font-size: 14px;
+    color: #aaa;
+}
+.demo-url code {
+    color: var(--accent-color);
+    word-break: break-all;
+}
+.demo-version {
+    margin: 0 0 1em 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+}
+.demo-schema {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    text-align: left;
+    min-height: 3em;
+    justify-content: center;
+}
+.demo-schema-table {
+    font-family: var(--mono-font);
+    font-size: 14px;
+    background: var(--raised-background-color);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.demo-schema-name {
+    color: var(--accent-color);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    padding: 0.55em 0.9em;
+    background: #161618;
+    border-bottom: 1px solid #2a2a2a;
+}
+.demo-schema-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5em;
+    padding: 0.5em 0.9em;
+}
+.demo-schema-col + .demo-schema-col {
+    border-top: 1px solid #232326;
+}
+.demo-schema-colname {
+    color: #e6e6e6;
+}
+.demo-schema-coltype {
+    color: #8a8f98;
+}
+.demo-schema-empty {
+    font-family: var(--mono-font);
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+    margin: 0;
+}
+.demo-steps {
+    display: flex;
+    gap: 0.75em;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+.demo-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--control-border-color);
+    color: var(--accent-color) !important;
+}
+.demo-btn-ghost:hover {
+    background: #1c1c1c;
+    color: var(--accent-hover-color) !important;
+}
+.demo-test {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 1.5em;
+}
+.demo-test-badge {
+    font-family: var(--mono-font);
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    padding: 0.25em 0.9em;
+    border-radius: 999px;
+}
+.result-pass .demo-test-badge {
+    color: #7ee787;
+    background: rgba(63, 185, 80, 0.16);
+}
+.result-fail .demo-test-badge {
+    color: #ffa198;
+    background: rgba(248, 81, 73, 0.16);
+}
+.demo-test-line {
+    font-size: 15px;
+    color: #cfcfcf;
+}
+.demo-test-line code {
+    font-size: 13px;
+    color: var(--accent-color);
+}
+.demo-test-line strong {
+    color: #f1f1f1;
+}
+.demo-test-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    align-items: center;
+    justify-content: center;
+}
+.demo-test-form label {
+    font-size: 14px;
+    color: #aaa;
+}
+.demo-test-form label code {
+    font-size: 13px;
+    color: var(--accent-color);
+}
+.demo-test-form input {
+    font-family: var(--mono-font);
+    font-size: 14px;
+    padding: 0.5em 0.7em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+}
+.demo-test-form button {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0.5em 1.1em;
+    border: none;
+    border-radius: var(--radius-control);
+    background: var(--cards-hover-background-color);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.demo-test-form button:hover {
+    background: var(--button-hover-background-color);
+}
+.demo-csrf-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9em;
+}
+.demo-csrf-scenario {
+    margin: 0;
+    font-size: 15px;
+    color: #cfcfcf;
+}
+.demo-csrf-scenario code {
+    color: var(--accent-color);
+}
+.demo-gqm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    text-align: left;
+    margin-bottom: 1em;
+}
+.demo-gqm-row {
+    font-size: 15px;
+    background: var(--raised-background-color);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 0.55em 0.8em;
+}
+.demo-gqm-id {
+    font-family: var(--mono-font);
+    font-size: 13px;
+    color: var(--accent-color);
+    margin-right: 0.4em;
+}
+.demo-gqm-author {
+    color: #888;
+    font-size: 14px;
+}
+.demo-gqm-saved {
+    margin: 0 0 1em 0;
+    font-size: 14px;
+    color: #7ee787;
+}
+.demo-gqm-saved code {
+    color: #7ee787;
+}
+.demo-gqm-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    justify-content: center;
+}
+.demo-gqm-form input {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 0.5em 0.7em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+}
+.demo-htmx-search {
+    font-family: inherit;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6em 0.8em;
+    margin-bottom: 1.2em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+}
+.demo-htmx-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    min-height: 2.2em;
+    align-content: flex-start;
+}
+/* when embedded on a .content page, the broad `.content ul` rule (inline-block
+   at content-width) outweighs the base rule above and pushes the list past the
+   stage as full-width rows; re-assert the chip layout with higher specificity */
+.content .demo-htmx-list {
+    display: flex;
+    width: auto;
+    max-width: 100%;
+    padding: 0;
+}
+.demo-htmx-item {
+    font-family: var(--mono-font);
+    font-size: 14px;
+    padding: 0.35em 0.75em;
+    border-radius: var(--radius-control);
+    background: #24242b;
+    border: 1px solid #33333c;
+    color: #e6e6e6;
+}
+.demo-htmx-empty {
+    list-style: none;
+    color: #888;
+    font-style: italic;
+}
+.demo-taps {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.4em;
+    font-size: 15px;
+    color: #aaa;
+    margin: 0.4em 0 1.1em;
+}
+.demo-tap-count {
+    font-family: var(--mono-font);
+    font-size: 20px;
+    line-height: 1;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+.demo-validation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9em;
+    max-width: 320px;
+    margin: 0 auto;
+    text-align: left;
+}
+.demo-vfield {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.demo-vfield label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+    font-size: 13px;
+    color: #aaa;
+}
+.demo-vfield input,
+.demo-vfield select {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 0.5em 0.7em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+    box-sizing: border-box;
+}
+.demo-vfield:has(.demo-verror) input {
+    border-color: #c0384a;
+}
+.demo-verror {
+    font-size: 13px;
+    color: #ffa198;
+}
+.demo-validation-form .demo-btn {
+    align-self: flex-start;
+    margin-top: 0.3em;
+}
+.demo-tpl-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8em 1.4em;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 1.2em;
+}
+.demo-tpl-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+    font-size: 13px;
+    color: #aaa;
+}
+.demo-tpl-field select,
+.demo-tpl-field input {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 0.5em 0.7em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+    box-sizing: border-box;
+    height: 2.6em;
+}
+.demo-tpl-panel {
+    text-align: left;
+    margin-top: 1em;
+}
+.demo-tpl-label {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    margin-bottom: 0.5em;
+}
+.demo-tpl-src {
+    margin: 0;
+    padding: 0.9em 1.1em;
+    background: var(--raised-background-color);
+    border-radius: var(--radius);
+    overflow-x: auto;
+}
+.demo-tpl-src code {
+    font-size: 12.5px;
+    line-height: 1.55;
+}
+.demo-tpl-render {
+    padding: 0.9em 1.1em;
+    background: var(--raised-background-color);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    font-size: 15px;
+    color: #e6e6e6;
+}
+.demo-tpl-tag {
+    display: inline-block;
+    background: #2b3a55;
+    color: #cfe0ff;
+    border-radius: var(--radius-control);
+    padding: 0.1em 0.5em;
+    font-size: 13px;
+    margin: 0 0.2em 0.2em 0;
+}
+.demo-query-sql {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.demo-wf {
+    align-items: stretch;
+}
+.demo-wf-place {
+    align-self: center;
+    padding: 0.55em 1.4em;
+    font: inherit;
+    font-weight: bold;
+    color: #0d0d0d;
+    background: var(--accent-color);
+    border: none;
+    border-radius: var(--radius-control);
+    cursor: pointer;
+}
+.demo-wf-place:hover {
+    filter: brightness(1.08);
+}
+.demo-wf-place:active {
+    transform: translateY(1px);
+}
+.demo-wf-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9em;
+}
+.demo-wf-empty {
+    margin: 0;
+    padding: 1em 1.1em;
+    color: #8a8a8a;
+    font-size: 14px;
+    border: 1px dashed #50505c;
+    border-radius: var(--radius-control);
+}
+.demo-wf-feed:has(.demo-wf-order) .demo-wf-empty {
+    display: none;
+}
+.demo-wf-order {
+    border: 1px solid #45454f;
+    border-radius: var(--radius-control);
+    overflow: hidden;
+}
+.demo-wf-order-head {
+    padding: 0.5em 0.8em;
+    background: #202023;
+    font-size: 14px;
+    color: #e7e7e7;
+}
+.demo-wf-order-no {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-right: 0.4em;
+}
+.demo-wf-trace {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+    padding: 0.7em;
+    font-family: var(--mono-font);
+    font-size: 13.5px;
+}
+.demo-wf-row {
+    padding: 0.4em 0.7em;
+    background: var(--raised-background-color);
+    border-left: 3px solid #333;
+    border-radius: var(--radius-control);
+    color: #cfcfcf;
+    animation: demo-wf-in 0.35s ease both;
+    animation-delay: var(--d, 0ms);
+}
+@keyframes demo-wf-in {
+    from { opacity: 0; transform: translateX(-0.6em); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .demo-wf-row { animation: none; }
+}
+.demo-wf-who {
+    font-weight: bold;
+}
+.demo-wf-warehouse {
+    border-left-color: var(--accent-color);
+}
+.demo-wf-warehouse .demo-wf-who {
+    color: var(--accent-color);
+}
+.demo-wf-courier {
+    border-left-color: #ffa267;
+    margin-left: 1.3em;
+}
+.demo-wf-courier .demo-wf-who {
+    color: #ffa267;
+}
+.demo-wf-notifier {
+    border-left-color: #7ee787;
+    margin-left: 2.6em;
+}
+.demo-wf-notifier .demo-wf-who {
+    color: #7ee787;
+}
+.demo-q-toggles {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em 1.3em;
+    margin-top: 0.3em;
+}
+.demo-q-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 14px;
+    color: #cfcfcf;
+    cursor: pointer;
+}
+.demo-q-toggle input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent-color);
+    cursor: pointer;
+}
+.demo-query-note {
+    margin: 1em 0 0 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #c6cfd8;
+    background: var(--raised-background-color);
+    border-left: 2px solid var(--accent-color);
+    border-radius: var(--radius-control);
+    padding: 0.7em 0.9em;
+}
+.demo-query-note code {
+    color: var(--accent-color);
+}
+.bld-config {
+    width: var(--content-width);
+    max-width: var(--content-width);
+    box-sizing: border-box;
+}
+.bld-config .demo-stage {
+    text-align: left;
+    padding: 1.5em;
+}
+.bld-config-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1em 1.5em;
+    align-items: flex-start;
+    background: #1f1f25;
+    border: 1px solid #33333c;
+    border-radius: var(--radius);
+    padding: 1.2em 1.3em;
+    margin-bottom: 1.4em;
+}
+.bld-checks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9em 1.5em;
+    flex-basis: 100%;
+}
+.bld-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45em;
+    font-size: 13px;
+    color: #aaa;
+}
+.bld-field input[type=text],
+.bld-field select {
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.4;
+    padding: 0.5em 0.7em;
+    border: 1px solid var(--control-border-color);
+    border-radius: var(--radius-control);
+    background: var(--raised-background-color);
+    color: #f1f1f1;
+    box-sizing: border-box;
+    height: 2.6em;
+}
+.bld-field.bld-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 15px;
+    color: var(--main-text-color);
+}
+.bld-field.bld-check input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--cards-hover-background-color);
+}
+.bld-config-out {
+    margin: 0;
+    padding: 1em 1.2em;
+    background: var(--raised-background-color);
+    border-radius: var(--radius);
+    overflow-x: auto;
+}
+.bld-config-out code {
+    font-size: 13px;
+    line-height: 1.5;
 }
 .bld-matrix {
     margin-top: 1em;
@@ -195,13 +1223,71 @@ p, ul {
     background-color: #111
 }
 .bld-matrix th {
-    padding: 0.5em;
+    padding: 0.5em 0.7em;
+    background-color: #1c1c1c;
+    color: #f1f1f1;
+    text-align: left;
 }
 .bld-matrix td {
-    width: 20%;
-    text-align: center;
+    text-align: left;
     border: var(--table-border);
-    padding: 0.5em;
+    padding: 0.5em 0.7em;
+}
+.bld-matrix td:first-child {
+    color: #9a9a9a;
+}
+.bld-matrix th:last-child,
+.bld-matrix td:last-child {
+    color: #ffffff;
+}
+.site-footer {
+    margin-top: 4em;
+    padding: 2.5em 1em 0 1em;
+    border-top: 1px solid #232329;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em 5em;
+}
+.footer-links h3 {
+    margin: 0 0 0.6em 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+}
+.footer-links a, .footer-links a:visited {
+    display: block;
+    margin-bottom: 0.35em;
+    font-size: 15px;
+    color: #bbb;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    color: #ffffff;
+}
+div.powered {
+    margin-top: 2em;
+    text-align: center;
+}
+img.powered {
+    width: 140px;
+}
+.site-source {
+    margin: 1.75em auto 0;
+    max-width: 40em;
+    text-align: center;
+    font-size: 15px;
+    color: #9a9a9a;
+}
+.copyright {
+    margin-top: 0.75em;
+    text-align: center;
+    font-size: 14px;
+    color: #8a8a8a;
 }
 .bld-matrix td:first-child {
     text-align: left;
@@ -210,14 +1296,28 @@ p, ul {
     .card:hover {
         background: var(--cards-hover-background-color);
         color: var(--cards-hover-text-color) !important;
+        transform: translateY(-2px);
+    }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 641px) {
+    /* below this width the centered logo/pitch block reaches under the
+       corner-anchored nav, so give the nav its own row instead */
+    .header {
+        flex-wrap: wrap;
+    }
+    .nav {
+        position: static;
+        order: -1;
+        width: 100%;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding-right: 1.5em;
+        margin-bottom: 0.5em;
     }
 }
 
 @media screen and (max-width: 840px) {
-    :root {
-        --card-width: 220px;
-        --content-width: 580px;
-    }
     body {
         font-size: 16px;
     }
@@ -230,21 +1330,20 @@ p, ul {
     .pitch {
         font-size: 18px;
     }
-    .content h1 {
+    .content h2 {
         font-size: 21px;
     }
 }
 
 @media screen and (max-width: 640px) {
     :root {
-        --card-width: 180px;
         --content-width: auto;
     }
     .header {
         flex-direction: column;
         align-items: baseline;
-        padding-left: 3em;
-        padding-right: 3em;
+        padding-left: 2em;
+        padding-right: 2em;
         width: auto;
     }
     .logo {
@@ -252,42 +1351,85 @@ p, ul {
         width: 150px;
     }
     .pitch {
-        margin: 0.5em 2em 0 0;
-        font-size: 18px;
+        margin: 0.5em 0 0 0;
+        font-size: min(18px, 4.6vw);
+    }
+    .nav {
+        position: static;
+        margin-top: 0.75em;
+    }
+    .header.compact .logo {
+        width: 100px;
+    }
+    .header.compact .nav {
+        margin-top: 0.5em;
+    }
+    .content .features {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+    .install {
+        gap: 0.8em;
+        padding: 0.6em 0.7em 0.6em 1em;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    /* long commands wrap instead of overflowing, the copy button does the copying */
+    .install code {
+        font-size: min(16px, 3.4vw);
+        white-space: normal;
+        overflow-wrap: anywhere;
+        min-width: 0;
+    }
+    .bld-matrix {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    .footer-links {
+        flex-wrap: nowrap;
+        gap: 1.5em;
+    }
+    .footer-links h3 {
+        font-size: 12px;
+    }
+    .footer-links a {
+        font-size: 13px;
+    }
+    .cards {
+        grid-template-columns: max-content;
+        justify-content: center;
+    }
+    .card {
+        padding: 1em 1.5em;
     }
     .content {
         flex-direction: column;
         align-items: stretch;
     }
-    .content div {
+    .content ul {
+        display: block;
+        width: auto;
+        margin: 1em 0 0 0;
+        padding-left: 1.5em;
+    }
+    .content > div {
         flex-grow: 1;
     }
 }
 
 @media screen and (max-width: 380px) {
-    :root {
-        --card-width: 160px;
-    }
-    #fork-me {
-        display: none;
-    }
     .header {
-        padding-left: 2em;
-        padding-right: 2em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
     }
     .logo {
         width: 120px;
-    }
-    .pitch {
-        font-size: 16px;
     }
 }
 
 @media screen and (max-width: 320px) {
     .logo {
         width: 100px;
-    }
-    .pitch {
-        font-size: 14px;
     }
 }

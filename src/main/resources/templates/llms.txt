@@ -1,0 +1,70 @@
+# RIFE2
+
+> RIFE2 is a full-stack, no-declaration framework for building web applications in modern Java. Everything is expressed in plain, type-safe Java, with no XML, YAML or reflection magic, so the compiler and your tools understand the entire application. It ships as a single 2.5MB jar with zero dependencies, is an explicit Java module, and runs on Java 17 and later.
+
+RIFE2 is designed to be understood statically. Routes are fields, elements are classes, and templates are plain markup files, so an application's structure is discoverable by reading the code rather than by tracing runtime magic. Request code is ordinary blocking, sequential Java that runs on its own virtual thread, so there is no reactive API or async plumbing to learn, and continuations and the workflow engine extend that same sequential model across requests. This also makes it comfortable to build with an AI coding assistant: the type system catches mistakes at compile time, out-of-container tests run the whole request cycle in memory for a fast feedback loop, and the small, dependency-free footprint means there is no environment to reverse engineer. The companion build tool, bld, is itself plain Java and can expose its commands to agents over the Model Context Protocol.
+
+## Start here
+- [Getting Started](https://github.com/rife2/rife2/wiki/Getting-Started): install RIFE2 and build a first application
+- [Quickstart](https://github.com/rife2/rife2#quickstart): a runnable Hello World in a dozen lines
+- [Project on GitHub](https://github.com/rife2/rife2): source, issues and releases
+- [Documentation wiki](https://github.com/rife2/rife2/wiki): the full feature reference
+- [Javadocs](https://rife2.github.io/rife2/): the complete API reference for every class, method and annotation
+- [Live examples](https://rife2.com): minimal, runnable demos of each feature, each linking to its own source
+
+## Web engine
+- [Site](https://github.com/rife2/rife2/wiki/Site): the application entry point, where the site's routes are declared
+- [Routing](https://github.com/rife2/rife2/wiki/Routing): routes are type-safe fields, so links and URLs survive refactoring
+- [Path Info Mapping](https://github.com/rife2/rife2/wiki/Path-Info-Mapping): map structured, clean URL paths onto a single element
+- [Elements](https://github.com/rife2/rife2/wiki/Elements): the unit of request handling, written as a class or a lambda
+- [Field Annotations](https://github.com/rife2/rife2/wiki/Field-Annotations): bind request parameters, path info, cookies, headers and bodies to element fields
+- [Continuations](https://github.com/rife2/rife2/wiki/Continuations): pause a running method across requests and resume with locals intact
+- [Server-Sent Events](https://github.com/rife2/rife2/wiki/Server-Sent-Events): push to every connected client from anywhere with a broadcaster
+- [htmx Support](https://github.com/rife2/rife2/wiki/htmx-Support): serve HTML fragments, read and set HX-* headers, and trigger client events, htmx is not a dependency
+- [Dependency Injection](https://github.com/rife2/rife2/wiki/Dependency-Injection): pass services into elements instead of looking them up
+- [Out-of-container Testing](https://github.com/rife2/rife2/wiki/Out-of-container-Testing): drive forms and links in memory, with no running server
+
+## Templates
+- [Bidirectional Templates](https://github.com/rife2/rife2/wiki/Bidirectional-Templates): logic-less templates with named blocks and values, the logic stays in Java
+- [Filtered Template Tags](https://github.com/rife2/rife2/wiki/Filtered-Template-Tags): pull request parameters, properties, config, cookies, routes and localized strings into a template by convention
+- [Template Types](https://github.com/rife2/rife2/wiki/Template-Types): the one engine renders HTML, XML, SVG, JSON, text and SQL, in or out of the web engine
+
+## Data
+- [Datasources](https://github.com/rife2/rife2/wiki/Datasources): database configuration, where the SQL dialect comes from the driver
+- [Query Builders](https://github.com/rife2/rife2/wiki/Query-Builders): build SQL as type-safe Java, rendered in each database's own dialect
+- [Transactions](https://github.com/rife2/rife2/wiki/Transactions): group database queries into isolated units of work
+- [Generic Query Manager](https://github.com/rife2/rife2/wiki/Generic-Query-Manager): store and restore beans with no SQL and no row mapping
+- [Database Migrations](https://github.com/rife2/rife2/wiki/Database-Migrations): versioned, reversible schema evolution
+
+## Metadata and validation
+- [Constraints](https://github.com/rife2/rife2/wiki/Constraints): declare rules and metadata once, on the bean
+- [Metadata Merging](https://github.com/rife2/rife2/wiki/Metadata-Merging): keep a bean a plain POJO and declare its constraints in a companion class
+- [Validation](https://github.com/rife2/rife2/wiki/Validation): server-side validation, groupable, with a precise error per field
+- [Form Generation](https://github.com/rife2/rife2/wiki/Form-Generation): generate and repopulate forms and fields from a bean's constraints
+
+## Authentication and security
+- [Authentication Sessions](https://github.com/rife2/rife2/wiki/Authentication-Sessions): create and manage sessions once credentials are validated
+- [Protected Routes](https://github.com/rife2/rife2/wiki/Protected-Routes): ready-made login, authentication, identification and logout elements
+- [CSRF Protection](https://github.com/rife2/rife2/wiki/CSRF-Protection): token-guarded state-changing requests, from a form field or an htmx header
+
+## Workflow engine
+- [Work Coordination](https://github.com/rife2/rife2/wiki/Work-Coordination): coordinate concurrent tasks with events, without managing threads, locks or queues
+- [Workflow Continuations](https://github.com/rife2/rife2/wiki/Workflow-Continuations): each task is plain sequential Java that pauses on an event and resumes
+
+## Content management
+- [Content Management Framework](https://github.com/rife2/rife2/wiki/Content-Management-Framework): store, validate, transform, version and stream typed content and binary data
+
+## Other features
+- [Resource Abstraction](https://github.com/rife2/rife2/wiki/Resource-Abstraction): find templates, files and classpath resources through one resource finder
+- [JSON](https://github.com/rife2/rife2/wiki/JSON): convert beans and records to and from JSON, without annotations
+- [Feeds](https://rife2.github.io/rife2/rife/feed/package-summary.html): generate RSS, Atom and JSON feeds from beans through an entry provider
+- [Localization](https://rife2.github.io/rife2/rife/tools/Localization.html): resolve localized strings from resource bundles, in Java code and directly through l10n template tags
+- [Config](https://github.com/rife2/rife2/wiki/Config): typed, hierarchical configuration, changeable and savable without a database
+- [Scheduler](https://github.com/rife2/rife2/wiki/Scheduler): a persisted scheduler for background work
+
+## Build and deploy
+- [bld](https://rife2.com/bld): a pure Java build tool with no DSL, and an MCP interface for AI agents
+- [bld on GitHub](https://github.com/rife2/bld): source and documentation
+- [Deployment](https://github.com/rife2/rife2/wiki/Deployment-Bld): package and run a RIFE2 application
+- [Static Resources](https://github.com/rife2/rife2/wiki/Static-Resources-Bld): serve CSS, JavaScript, images and other static files
+- [GraalVM Native Image](https://github.com/rife2/rife2/wiki/GraalVM-Native-Image): compile a RIFE2 application to a native binary

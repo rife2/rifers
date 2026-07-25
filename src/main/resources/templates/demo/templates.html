@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live bidirectional templates demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/prism.css?{{v context:paramRandom/}}">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/prism.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/site.js?{{v context:paramRandom/}}" defer></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#templates">Back to RIFE2</a></p>
+    <h1>Bidirectional Templates</h1>
+    <p>A RIFE2 template is an ordinary file with no logic, HTML here, but XML, SVG, text and JSON work the same way. Pick a state and watch: the <em>template never changes</em>, the Java picks a different named block, and you get a different page. The logic lives in the Java, not the template.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage">
+        <form class="demo-tpl-form" method="get" action="{{v run_url/}}"
+              hx-get="{{v run_url/}}" hx-trigger="change, keyup changed delay:250ms, submit"
+              hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <label class="demo-tpl-field">Show
+                <select name="state">
+                    <option value="welcome"{{v state_welcome/}}>welcome</option>
+                    <option value="dashboard"{{v state_dashboard/}}>dashboard</option>
+                </select>
+            </label>
+            <label class="demo-tpl-field">Tags
+                <input type="text" name="tags" value="{{v tags_input/}}" aria-label="tags">
+            </label>
+        </form>
+        <div class="demo-tpl-panel">
+            <div class="demo-tpl-label">the template, never changes</div>
+            <pre class="demo-tpl-src"><code class="language-html">&lt;!--v body/--&gt;
+
+&lt;!--b welcome--&gt;Welcome, stranger. Sign in to see your dashboard.&lt;!--/b--&gt;
+&lt;!--b dashboard--&gt;Hi &lt;strong&gt;&lt;!--v name/--&gt;&lt;/strong&gt;! Tags: &lt;!--v tags/--&gt;&lt;!--/b--&gt;
+&lt;!--b tag--&gt;&lt;span class="demo-tpl-tag"&gt;&lt;!--v label/--&gt;&lt;/span&gt;&lt;!--/b--&gt;</code></pre>
+        </div>
+        <div class="demo-tpl-panel">
+            <div class="demo-tpl-label">the rendered result</div>
+            <div class="demo-tpl-render"><!--v body/--></div>
+        </div>
+    </div>
+<!--/bv-->
+    <p class="demo-note">The same logic-less template renders both states. Change <em>Show</em> and only the Java's choice of block changes, never the template.</p>
+</main>
+</body>
+</html>
+<!--b welcome-->Welcome, stranger. Sign in to see your dashboard.<!--/b-->
+<!--b dashboard-->Hi <strong><!--v name/--></strong>! Tags: <!--v tags/--><!--/b-->
+<!--b tag--><span class="demo-tpl-tag"><!--v label/--></span><!--/b-->

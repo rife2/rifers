@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live bld build file configurator - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/prism.css?{{v context:paramRandom/}}">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/prism.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/site.js?{{v context:paramRandom/}}" defer></script>
+</head>
+<body>
+<main class="demo demo-wide">
+    <p class="demo-back"><a href="{{v route:.bld/}}">Back to bld</a></p>
+    <h1>Build file configurator</h1>
+    <p>Change the options and watch a complete, real <code>bld</code> build file regenerate on the server. This is exactly the <code>Build.java</code> you would write by hand, nothing is executed.</p>
+    <div class="bld-config">
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage">
+        <form class="bld-config-form" method="get" action="{{v run_url/}}"
+              hx-get="{{v run_url/}}" hx-trigger="change, submit"
+              hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <label class="bld-field">Type
+                <select name="type" aria-label="project type">
+                    <option value="app"{{v type_app/}}>Application</option>
+                    <option value="lib"{{v type_lib/}}>Java library</option>
+                    <option value="web"{{v type_web/}}>RIFE2 web app</option>
+                </select>
+            </label>
+            <label class="bld-field">Package
+                <input type="text" name="pkg" value="{{v pkg/}}" aria-label="package name">
+            </label>
+            <label class="bld-field">Project name
+                <input type="text" name="name" value="{{v name/}}" aria-label="project name">
+            </label>
+            <div class="bld-checks">
+                <label class="bld-field bld-check">
+                    <input type="hidden" name="junit" value="false">
+                    <input type="checkbox" name="junit" value="true"{{v junit_checked/}}> JUnit 5 tests
+                </label>
+                <label class="bld-field bld-check">
+                    <input type="hidden" name="logging" value="false">
+                    <input type="checkbox" name="logging" value="true"{{v logging_checked/}}> SLF4J logging
+                </label>
+                <label class="bld-field bld-check">
+                    <input type="hidden" name="commons" value="false">
+                    <input type="checkbox" name="commons" value="true"{{v commons_checked/}}> Apache Commons Lang
+                </label>
+            </div>
+        </form>
+        <pre class="bld-config-out"><code class="language-java">package {{v package/}};
+
+import rife.bld.{{v baseClass/}};
+
+import java.util.List;
+
+import static rife.bld.dependencies.Repository.*;
+import static rife.bld.dependencies.Scope.*;<!--v templateTypeImport/-->
+
+public class {{v buildClass/}} extends {{v baseClass/}} {
+    public {{v buildClass/}}() {
+        pkg = "{{v package/}}";
+        name = "{{v artifact/}}";<!--v mainClassLine/-->
+        version = version(0,1,0);
+
+        repositories = List.of(MAVEN_CENTRAL, RIFE2_RELEASES);<!--v deps/--><!--v precompile/-->
+    }
+
+    public static void main(String[] args) {
+        new {{v buildClass/}}().start(args);
+    }
+}</code></pre>
+    </div>
+<!--/bv-->
+    </div>
+    <p class="demo-note">The whole file is rendered by a RIFE2 template, so this page is itself a small bld and RIFE2 example. The RIFE2 web app option is exactly what <code>bld create-rife2</code> generates.</p>
+</main>
+</body>
+</html>
+<!--b tt_import-->
+import static rife.bld.operations.TemplateType.*;<!--/b-->
+<!--b main_app-->
+        mainClass = "{{v package/}}.{{v baseName/}}";<!--/b-->
+<!--b main_web-->
+        mainClass = "{{v package/}}.{{v baseName/}}Site";
+        uberJarMainClass = "{{v package/}}.{{v baseName/}}SiteUber";<!--/b-->
+<!--b precompile_web-->
+
+        precompileOperation()
+            .templateTypes(HTML);<!--/b-->
+<!--b scope_compile-->
+
+        scope(compile)<!--v compile_includes/-->;<!--/b-->
+<!--b scope_test-->
+
+        scope(test)<!--v test_includes/-->;<!--/b-->
+<!--b scope_standalone-->
+
+        scope(standalone)<!--v standalone_includes/-->;<!--/b-->
+<!--b inc_rife2-->
+            .include(dependency("com.uwyn.rife2",
+                                "rife2",
+                                version(1,9,1)))<!--/b-->
+<!--b inc_slf4j_api-->
+            .include(dependency("org.slf4j",
+                                "slf4j-api",
+                                version(2,0,18)))<!--/b-->
+<!--b inc_commons-->
+            .include(dependency("org.apache.commons",
+                                "commons-lang3",
+                                version(3,17,0)))<!--/b-->
+<!--b inc_jsoup-->
+            .include(dependency("org.jsoup",
+                                "jsoup",
+                                version(1,22,2)))<!--/b-->
+<!--b inc_junit_jupiter-->
+            .include(dependency("org.junit.jupiter",
+                                "junit-jupiter",
+                                version(6,1,2)))<!--/b-->
+<!--b inc_junit_console-->
+            .include(dependency("org.junit.platform",
+                                "junit-platform-console-standalone",
+                                version(6,1,2)))<!--/b-->
+<!--b inc_jetty-->
+            .include(dependency("org.eclipse.jetty.ee10",
+                                "jetty-ee10",
+                                version(12,1,11)))<!--/b-->
+<!--b inc_jetty_servlet-->
+            .include(dependency("org.eclipse.jetty.ee10",
+                                "jetty-ee10-servlet",
+                                version(12,1,11)))<!--/b-->
+<!--b inc_slf4j_simple-->
+            .include(dependency("org.slf4j",
+                                "slf4j-simple",
+                                version(2,0,18)))<!--/b-->

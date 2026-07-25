@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Server-Sent Events demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/htmx-ext-sse.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#sse">Back to RIFE2</a></p>
+    <h1>Server-Sent Events</h1>
+    <p>The time below is pushed from the server once per second over a single SSE connection, using RIFE2's <code>SseBroadcaster</code>. The tap tally is shared: a tap from anyone is broadcast to everyone. No polling, no page reloads. Open this page in a second tab and watch both stay in sync.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage" hx-ext="sse" sse-connect="{{v route:sseStream/}}">
+        <div sse-swap="clock"><!--v clock_row/--></div>
+        <p class="demo-taps"><span class="demo-tap-count" sse-swap="taps"><!--v taps_row/--></span> taps from everyone watching</p>
+        <button class="demo-btn" type="button" hx-post="{{v route:sseTap/}}" hx-swap="none">Tap +1</button>
+    </div>
+<!--/bv-->
+    <p class="demo-note">The clock and the tap tally are both streamed live by rife2.com itself.</p>
+</main>
+</body>
+</html>
+<!--b clock_row--><div class="demo-clock">{{v time/}}</div><!--/b-->
+<!--b taps_row-->{{v taps/}}<!--/b-->

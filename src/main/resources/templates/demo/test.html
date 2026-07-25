@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live out-of-container testing demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#testing">Back to RIFE2</a></p>
+    <h1>Out-of-container Testing</h1>
+    <p>This test drives the app the way a browser would, but entirely in-process: a <code>MockConversation</code> finds the <code>&lt;form&gt;</code> in the response HTML, fills it in, submits it, and asserts the reply. A full request/response cycle with no servlet container and no browser. Change the expected value to watch the same test pass and fail.</p>
+    <!--v stage/-->
+    <p class="demo-note">The test parses the HTML, fills the form, and submits it, all without a running server. This is what makes RIFE2 tests fast enough to run on every change.</p>
+</main>
+</body>
+</html>
+<!--bv stage-->
+    <div class="demo-stage">
+        <!--v result/-->
+        <form class="demo-test-form" method="get" action="{{v run_url/}}"
+              hx-get="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <label>assert submitting the form with <code>who = Ada</code> returns</label>
+            <input type="text" name="expected" value="{{v expected/}}" aria-label="expected response">
+            <button type="submit">Run test</button>
+        </form>
+    </div>
+<!--/bv-->
+<!--b result_pass-->
+<div class="demo-test result-pass">
+    <span class="demo-test-badge">PASS</span>
+    <div class="demo-test-line">Found the form, filled <code>who = Ada</code>, submitted it, got back <code>"{{v actual/}}"</code></div>
+    <div class="demo-test-line">the whole flow ran in <strong>{{v micros/}} µs</strong>, no server or browser</div>
+</div>
+<!--/b-->
+<!--b result_fail-->
+<div class="demo-test result-fail">
+    <span class="demo-test-badge">FAIL</span>
+    <div class="demo-test-line">expected <code>"{{v expected/}}"</code> but submitting the form returned <code>"{{v actual/}}"</code></div>
+</div>
+<!--/b-->

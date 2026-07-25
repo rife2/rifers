@@ -12,15 +12,14 @@ public class MyAppBuild extends Project {
         mainClass = "com.example.MyApp";
         version = version(0,1,0);
 
-        downloadSources = true;
         repositories = List.of(MAVEN_CENTRAL, RIFE2_RELEASES);
         scope(test)
             .include(dependency("org.junit.jupiter",
                                 "junit-jupiter",
-                                version(5,11,4)))
+                                version(6,1,2)))
             .include(dependency("org.junit.platform",
                                 "junit-platform-console-standalone",
-                                version(1,11,4)));
+                                version(6,1,2)));
     }
 
     public static void main(String[] args) {

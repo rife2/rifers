@@ -23,8 +23,12 @@ Go to:
 ./bld war
 ```
 
-The resulting archive will be in:
-`war/build/libs`
+The resulting archive will be in `build/dist`.
+
+The counter and workflow demos use RIFE2's continuations, which need the RIFE2
+agent at runtime. `./bld run` applies it automatically; when you deploy the WAR
+to an external servlet container you must add the agent to that container's JVM
+yourself, for example with `-javaagent:/path/to/rife2-agent-<version>.jar`.
 
 
 ## Making an UberJar

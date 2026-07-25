@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live dynamic validation demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#validation">Back to RIFE2</a></p>
+    <h1>Dynamic Validation</h1>
+    <p>The form binds straight to a <code>Constrained</code> bean whose rules live on the bean itself. Submit it and RIFE2 validates every field server-side, returning a precise error for each one that fails.</p>
+    <p class="demo-aside">The constraints don't have to live on the bean. With <a href="https://github.com/rife2/rife2/wiki/Metadata-Merging">metadata merging</a> you keep the bean a plain POJO and declare the same rules in a companion <code>SignupMetaData</code> class that RIFE2 weaves in.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage">
+        <!--v result/-->
+        <form class="demo-validation-form" method="post" action="{{v run_url/}}"
+              hx-post="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <div class="demo-vfield">
+                <label>Validate
+                    <select name="group" aria-label="which group to validate">
+                        <option value=""{{v grp_all/}}>Everything</option>
+                        <option value="account"{{v grp_account/}}>Account (name, email)</option>
+                        <option value="profile"{{v grp_profile/}}>Profile (age)</option>
+                    </select>
+                </label>
+            </div>
+            <div class="demo-vfield">
+                <label>Name
+                    <input type="text" name="name" value="{{v name/}}" aria-label="name">
+                </label>
+                <!--v error_name/-->
+            </div>
+            <div class="demo-vfield">
+                <label>Email
+                    <input type="text" name="email" value="{{v email/}}" aria-label="email">
+                </label>
+                <!--v error_email/-->
+            </div>
+            <div class="demo-vfield">
+                <label>Age
+                    <input type="text" name="age" value="{{v age/}}" aria-label="age">
+                </label>
+                <!--v error_age/-->
+            </div>
+            <button type="submit" class="demo-btn">Sign up</button>
+        </form>
+    </div>
+<!--/bv-->
+    <p class="demo-note">The rules are declared once on the bean and split into named groups. Validate everything, or just one group, like a single step of a wizard. Try an empty field, a bad email, or an age like 5.</p>
+</main>
+</body>
+</html>
+<!--b result_ok-->
+<div class="demo-test result-pass">
+    <span class="demo-test-badge">VALID</span>
+    <div class="demo-test-line">Every field passed its constraints, the bean is ready to use.</div>
+</div>
+<!--/b-->
+<!--b error_msg--><span class="demo-verror">{{v verror_msg/}}</span><!--/b-->

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live migrations demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#migrations">Back to RIFE2</a></p>
+    <h1>Migrations</h1>
+    <p>Step through the schema versions. Each step runs the real migrations against a fresh in-memory database and reads back the actual schema. Rolling back genuinely executes the <code>down()</code> migrations.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage">
+        <p class="demo-version">Schema version {{v version/}} of {{v max/}}</p>
+        <div class="demo-schema"><!--v schema/--></div>
+        <div class="demo-steps"><!--v steps/--></div>
+    </div>
+<!--/bv-->
+    <p class="demo-note">A private database per request, destroyed before the response is sent. Nothing accumulates, whatever the traffic.</p>
+</main>
+</body>
+</html>
+<!--b schema_table--><div class="demo-schema-table"><div class="demo-schema-name">{{v table_name/}}</div><!--v columns/--></div><!--/b-->
+<!--b schema_column--><div class="demo-schema-col"><span class="demo-schema-colname">{{v column_name/}}</span><span class="demo-schema-coltype">{{v column_type/}}</span></div><!--/b-->
+<!--b schema_empty--><p class="demo-schema-empty">empty database, no tables yet</p><!--/b-->
+<!--b step_back--><a class="demo-btn demo-btn-ghost" href="{{v back_url/}}"
+   hx-get="{{v back_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">&#9664; Roll back</a><!--/b-->
+<!--b step_up--><a class="demo-btn" href="{{v up_url/}}"
+   hx-get="{{v up_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">Migrate up &#9654;</a><!--/b-->

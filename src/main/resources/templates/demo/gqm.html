@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live generic query manager demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/site.js?{{v context:paramRandom/}}" defer></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#query-manager">Back to RIFE2</a></p>
+    <h1>Generic Query Manager</h1>
+    <p>The manager derives the table straight from a plain <code>Book</code> bean, then saves, restores and counts rows with single method calls. No SQL, no row mapping, no annotations.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage">
+        <p class="demo-version">{{v count/}} books in the database</p>
+        <div class="demo-gqm-list"><!--v rows/--></div>
+        <!--v saved/-->
+        <form class="demo-gqm-form" method="get" action="{{v run_url/}}"
+              hx-get="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <input type="text" name="title" value="{{v title/}}" placeholder="Title" aria-label="book title" required>
+            <input type="text" name="author" value="{{v author/}}" placeholder="Author" aria-label="book author">
+            <button type="submit" class="demo-btn">Save book</button>
+        </form>
+    </div>
+<!--/bv-->
+    <p class="demo-note">Every request builds a private in-memory database, seeds two books, saves yours next to them, reads them all back through the manager, then discards the database. Nothing is kept between requests, so it is only here to show the save and restore round-trip. Saving also sends an <code>HX-Trigger</code> response header, so the page flashes a toast from a client event with no extra request.</p>
+</main>
+</body>
+</html>
+<!--b book_row--><div class="demo-gqm-row"><span class="demo-gqm-id">#{{v book_id/}}</span> <strong>{{v book_title/}}</strong> <span class="demo-gqm-author">{{v book_author/}}</span></div><!--/b-->
+<!--b saved_note--><p class="demo-gqm-saved">Saved <strong>{{v new_title/}}</strong> as <code>#{{v new_id/}}</code></p><!--/b-->

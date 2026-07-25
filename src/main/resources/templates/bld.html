@@ -2,57 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="bld - pure Java build tool">
-    <meta property="og:description"
-          content="bld is a new build system that allows you to write your build logic in pure Java, significantly reducing the cognitive load and making it easier to reason about your build.">
-    <meta property="og:url" content="https://rife2.com/bld"/>
-    <meta charset="UTF-8">
-    <title>bld - pure Java build tool</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta property="og:locale" content="en_US"/>
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="{{v webapp:rootUrl/}}images/og-bld4.png?{{v context:paramRandom/}}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:creator" content="@gbevin">
-    <meta property="twitter:site" content="@gbevin">
-    <meta property="twitter:title" content="bld - pure Java build tool">
-    <meta property="twitter:description" content="bld is a new build system that allows you to write your build logic in pure Java, significantly reducing the cognitive load and making it easier to reason about your build.">
-    <meta property="twitter:image" content="{{v webapp:rootUrl/}}images/og-bld4.png?{{v context:paramRandom/}}">
-    <meta name="generator" content="RIFE2">
+    <meta name="htmx-config" content='{"ignoreTitle":true}'>
+    <!--v page_head/-->
     <!--v head_section/-->
 </head>
 <!--i common/-->
 
 <body>
-<script src="js/prism.js"></script>
+<script src="js/prism.js?{{v context:paramRandom/}}"></script>
+<script src="js/htmx.min.js?{{v context:paramRandom/}}"></script>
+<script src="js/site.js?{{v context:paramRandom/}}" defer></script>
 
-<a id="fork-me" href="https://github.com/rife2/bld">
-    <img style="position:fixed;top:0;right:0;border:0;z-index:99999"
-         src="data:image/png;base64,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"
-         alt="Fork me on GitHub">
-</a>
+<header class="header">
+    <div class="bld-logo"><img src="images/bld_logo.svg" alt="bld"></div>
+    <h1 class="pitch">Pure Java build tool for developers<br>who don't like dealing with build tools</h1>
+    <!--v nav/-->
+</header>
 
-<div class="header">
-    <div class="bld-logo"><img src="images/bld_logo.svg"></div>
-    <div class="pitch">Pure java build tool for developers<br>who don't like dealing with build tools</div>
-</div>
+<section class="hero">
+    <div class="os-switch" role="tablist" aria-label="Operating system">
+        <button type="button" role="tab" id="os-tab-unix" aria-controls="os-unix" aria-selected="true" data-os="unix">macOS / Linux</button>
+        <button type="button" role="tab" id="os-tab-windows" aria-controls="os-windows" aria-selected="false" tabindex="-1" data-os="windows">Windows</button>
+    </div>
+    <div class="os-panel" id="os-unix" role="tabpanel" aria-labelledby="os-tab-unix" data-os="unix">
+        <div class="install">
+            <code>bash -c "$(curl -fsSL https://rife2.com/bld/create.sh)"</code>
+            <button class="copy" type="button" aria-label="Copy command">Copy</button>
+        </div>
+        <p class="hero-meta">Java 17+ &nbsp;·&nbsp; no install needed &nbsp;·&nbsp;
+            <a href="https://github.com/rife2/bld/wiki/Installation">Homebrew, SDKMAN!, JBang and other install options</a></p>
+    </div>
+    <div class="os-panel" id="os-windows" role="tabpanel" aria-labelledby="os-tab-windows" data-os="windows" hidden>
+        <div class="install">
+            <code>irm https://rife2.com/bld/create.ps1 | iex</code>
+            <button class="copy" type="button" aria-label="Copy command">Copy</button>
+        </div>
+        <p class="hero-meta">Java 17+ &nbsp;·&nbsp; no install needed &nbsp;·&nbsp;
+            <a href="https://github.com/rife2/bld/wiki/Installation">SDKMAN!, JBang and other install options</a></p>
+    </div>
+</section>
 
-<div class="content">
-    <h1>What is bld?</h1>
+<main class="content">
+    <h2>What is bld?</h2>
 
-    <p><a href="https://github.com/rife2/bld"><code>bld</code></a> is a new build system that allows you to write your build logic in pure Java.</p>
+    <p><a href="https://github.com/rife2/bld"><code>bld</code></a> is a build tool that lets you write your build logic in pure Java.</p>
     <p><code>bld</code> was created because we're not really interested in build tools. We use them because we have to, but we'd rather just get on with coding the real stuff.</p>
 
     <p><code>bld</code> is designed with the following principles in mind:</p>
     <ul>
-        <li>tasks don't happen without you telling them to happen</li>
-        <li>no auto-magical behavior, task behavior is explicit and API-defined</li>
-        <li>managing libs yourself is fine, having that automated also, or mix and match</li>
-        <li>build logic is written in Java, with all the advantages of Java</li>
-        <li>standard collection of Java-centric tasks for common operations</li>
-        <li><code>bld</code> is distributed in a single jar, if you have the jar, you have the build system</li>
+        <li>Tasks don't happen without you telling them to happen.</li>
+        <li>No auto-magical behavior, task behavior is explicit and API-defined.</li>
+        <li>Managing libs yourself is fine, automating that is fine too, or mix and match.</li>
+        <li>Build logic is written in Java, with all the advantages of Java.</li>
+        <li>Standard collection of Java-centric tasks for common operations.</li>
+        <li><code>bld</code> is distributed as a single jar, if you have the jar, you have the build system.</li>
     </ul>
 
     <p class="links">
@@ -60,69 +63,127 @@
         <a href="https://discord.gg/zDG6anEXQX">Chat on Discord</a>
     </p>
 
-    <h1>Designed for modern Java</h1>
+    <h2>Designed for modern Java</h2>
 
-    <p>bld relies on Java 17 and leverages many of the features that this version of Java provides. Thanks to the modern language constructs, your Java build logic ends up looking very concise, is easily readable and understood by any IDE. You automatically get support for auto-completion and javadoc documentation, and you can split your build logic into multiple files and classes when you outgrow a single file.</p>
+    <p><code>bld</code> requires Java 17 or later and supports the latest JDK releases. Your build logic stays concise and readable, and any Java IDE understands it. You get auto-completion and javadoc documentation, and you can split your build logic into multiple files and classes when you outgrow a single file.</p>
 
-    <p>Here is a complete bld file for a Java application using JUnit 5 for its tests. Nothing else is needed to be able to run it, test it and distribute it:</p>
+    <p>Here is a complete bld file for a Java application using JUnit 5 for its tests. Nothing else is needed to run it, test it and distribute it. The same project expressed with Maven and Gradle is shown alongside, so you can compare for yourself:</p>
 
-    <div>
-        <pre data-src="{{v webapp:rootUrl/}}examples/MyappBuild.java"></pre>
+    <div class="examples">
+        <div class="example-tabs" role="tablist" aria-label="The same project in three build tools">
+            <button type="button" role="tab" aria-selected="true">bld</button>
+            <button type="button" role="tab" aria-selected="false">Maven</button>
+            <button type="button" role="tab" aria-selected="false">Gradle</button>
+        </div>
+        <div role="tabpanel">
+            <p class="caption">Pure Java, understood by your IDE from end to end</p>
+            <pre class="language-java" data-src="{{v webapp:rootUrl/}}examples/MyAppBuild.java"></pre>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">The same project as Maven XML</p>
+            <pre class="language-markup" data-src="{{v webapp:rootUrl/}}examples/pom.xml"></pre>
+        </div>
+        <div role="tabpanel" hidden>
+            <p class="caption">The same project as a Gradle build script</p>
+            <pre class="language-gradle" data-src="{{v webapp:rootUrl/}}examples/build.gradle"></pre>
+        </div>
     </div>
 
-    <h1>Where does bld fit?</h1>
+    <h2>Where does bld fit?</h2>
 
-    <p>From a very high level, build tools can be organized in a matrix:</p>
-    <ul>
-        <li>either your tool is declarative or in code</li>
-        <li>either your tool first describes a plan or immediately executes a plan</li>
-    </ul>
+    <p>Maven and Gradle describe a build for the tool to execute. <code>bld</code> is ordinary Java that runs directly.</p>
 
     <table class="bld-matrix">
-        <tr><th></th><th>Declarative</th><th>Code</th><th>Describes</th><th>Immediate</th></tr>
-        <tr><td>Maven</td><td>✔︎</td><td></td><td>✔︎</td><td></td></tr>
-        <tr><td>Gradle</td><td></td><td>✔︎</td><td>✔︎</td><td></td></tr>
-        <tr><td><code>bld</code></td><td></td><td>✔︎</td><td></td><td>✔︎</td></tr>
+        <tr><th></th><th>Maven</th><th>Gradle</th><th><code>bld</code></th></tr>
+        <tr><td>Language</td><td>XML</td><td>Groovy / Kotlin</td><td>Java</td></tr>
+        <tr><td>IDE completion &amp; refactoring</td><td>limited</td><td>with a plugin</td><td>full, it's Java</td></tr>
+        <tr><td>Debugging</td><td>attach to the JVM</td><td>attach to the daemon</td><td>the whole Java debugger: breakpoints, watches, &hellip;</td></tr>
+        <tr><td>Extensions</td><td>plugins</td><td>plugins / DSL</td><td>any Java jar, or a bld extension</td></tr>
     </table>
 
-    <p>Writing your build logic in the same language as your application (Java), significantly reduces the cognitive load, and taking actions immediately without having to mentally construct a described plan, makes it easier to reason about your build.</p>
+    <p>Writing your build logic in the same language as your application (Java) reduces the cognitive load, and taking actions immediately without having to mentally construct a described plan makes it easier to reason about your build.</p>
 
-    <h1>IDE support</h1>
+    <h2>Generate a build file</h2>
 
-    <p><a href="https://github.com/rife2/bld-idea"><img src="images/bld-idea.png" style="width: 100%"></a></p>
+    <p>Prefer to see it change as you go? Adjust the options below and a real, complete <code>bld</code> build file regenerates on the server, exactly the <code>Build.java</code> you would write by hand:</p>
+
+    <div class="bld-config">
+        <div class="demo-live" hx-get="{{v route:.demos.bldConfig/}}"
+             hx-trigger="load" hx-swap="innerHTML"></div>
+        <p class="demo-note">Rendered live by rife2.com, which is itself a RIFE2 app built with bld.
+            <a href="{{v route:.demos.bldConfig/}}" target="_blank" rel="noopener">Open in its own tab</a>.
+            <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/BldConfigDemo.java">View the source: BldConfigDemo.java</a>
+            <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/bldconfig.html">and its template: bldconfig.html</a></p>
+    </div>
+
+    <h2>One jar, everything included</h2>
+
+    <p>Out of the box, <code>bld</code> knows how to create, compile, test, document, run, package and publish your projects. Transitive dependencies are
+        resolved and downloaded in parallel with live progress reporting, Maven bills of materials (BOMs) keep versions consistent across your dependency
+        tree, builds run offline when you want them to, and your artifacts publish straight to Maven Central through the
+        Sonatype Central Portal.</p>
+
+    <p>Modern Java deployment is covered as well, with first-class operations for Java modules, <code>jmod</code>, <code>jlink</code> runtime images,
+        <code>jpackage</code> native installers, and annotation processing.</p>
+
+    <p>When you need more, there's a growing collection of <a href="https://github.com/rife2/bld/wiki/Extensions">extensions</a>: Kotlin, Spring Boot,
+        Checkstyle, PMD, SpotBugs, JaCoCo code coverage, ANTLR4, PIT mutation testing, TestNG, and many others. Writing your own extension is just writing
+        Java code.</p>
+
+    <h2>Ready for AI agents</h2>
+
+    <p>Since version 2.4, <code>bld</code> can serve your build commands as <a href="https://modelcontextprotocol.io">Model Context Protocol</a> (MCP)
+        tools. AI coding agents get a structured interface to compile, test and run your project, with streamed command output and execution metadata
+        instead of scraped terminal text. Your build stays explicit and API-defined; agents just get a first-class way to drive it.</p>
+
+    <div>
+        <p class="caption">Connect It!</p>
+        <pre><code class="language-bash">./bld mcp install         # register the project with Claude Code
+./bld mcp install cursor  # register with Cursor
+./bld mcp install vscode  # register with VS Code</code></pre>
+    </div>
+
+    <h2>IDE support</h2>
+
+    <p><a href="https://github.com/rife2/bld-idea"><img src="images/bld-idea.png" style="width: 100%" alt="The bld plugin for IntelliJ IDEA" loading="lazy"></a></p>
 
     <p>Since version 2.0, bld comes with its own <a href="https://github.com/rife2/bld-idea">IntelliJ IDEA plugin</a>:</p>
 
     <ul>
-        <li>detect bld projects and find their main Java class</li>
-        <li>quick access to open and edit the main Java class and wrapper properties of bld projects</li>
-        <li>list all the commands in bld projects in a side panel</li>
-        <li>execute one or multiple commands in the order they were selected</li>
-        <li>reload the commands in the bld project</li>
-        <li>terminate currently running bld commands</li>
+        <li>Detect bld projects and find their main Java class</li>
+        <li>Quick access to open and edit the main Java class and wrapper properties of bld projects</li>
+        <li>List all the commands in bld projects in a side panel</li>
+        <li>Execute one or multiple commands in the order they were selected</li>
+        <li>Reload the commands in the bld project</li>
+        <li>Terminate currently running bld commands</li>
         <li>bld console panel for command output with source code hyperlinking</li>
-        <li>display the bld dependency tree</li>
-        <li>toggle to run bld in offline or online mode</li>
-        <li>auto-save all open files before executing a bld command</li>
-        <li>convenient bld one-click cache invalidation</li>
-        <li>set bld commands to run before or after IDEA compilation</li>
-        <li>create custom bld command run configuration</li>
-        <li>assign keyboard shortcuts to bld commands</li>
+        <li>Display the bld dependency tree</li>
+        <li>Toggle to run bld in offline or online mode</li>
+        <li>Auto-save all open files before executing a bld command</li>
+        <li>Convenient bld one-click cache invalidation</li>
+        <li>Set bld commands to run before or after IDEA compilation</li>
+        <li>Create custom bld command run configurations</li>
+        <li>Assign keyboard shortcuts to bld commands</li>
     </ul>
 
-    <h1>Find out more</h1>
+    <h2>Get started</h2>
 
     <p><code>bld</code> lets your build logic get out of the way so that you can focus on writing applications.</p>
 
-    <p class="links">
-        <a href="https://github.com/rife2/bld/wiki/Installation">Install bld through Homebrew, SDKMAN!, JBang, ...</a>
-    </p>
-    <p class="links">
-        <a href="https://github.com/rife2/bld/wiki">Visit the project and read the documentation</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    </p>
+    <div>
+        <p class="caption">Install It!</p>
+        <pre><code class="language-bash">brew install rife2/tools/bld    # using Homebrew
+sdk install bld                 # using SDKMAN!
+jbang com.uwyn.rife2:bld:2.4.0  # using JBang</code></pre>
+    </div>
 
-    <!--v footer--><!--/v-->
-</div>
+    <p class="links">
+        <a href="https://github.com/rife2/bld/wiki/Installation">All install options</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://github.com/rife2/bld/wiki">Visit the project and read the documentation</a>
+    </p>
+</main>
+
+<!--v footer--><!--/v-->
 
 </body>
 </html>

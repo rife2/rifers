@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live query builders demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/prism.css?{{v context:paramRandom/}}">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/prism.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+    <script src="{{v webapp:rootUrl/}}js/site.js?{{v context:paramRandom/}}" defer></script>
+</head>
+<body>
+<main class="demo demo-wide">
+    <p class="demo-back"><a href="{{v route:.home/}}#query-builders">Back to RIFE2</a></p>
+    <h1>Query Builders</h1>
+    <p>Build a query in type-safe Java instead of writing SQL strings. Toggle the clauses on and off and pick a database, and RIFE2 renders the same Java query as SQL in that database's own dialect. Nothing connects, the dialect comes from the driver name alone.</p>
+    <!--v stage/-->
+<!--bv stage-->
+    <div class="demo-stage">
+        <form class="demo-tpl-form" method="get" action="{{v run_url/}}"
+              hx-get="{{v run_url/}}" hx-trigger="change, submit"
+              hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <label class="demo-tpl-field">Database
+                <select name="db">
+                    <option value="postgresql"{{v db_postgresql/}}>PostgreSQL</option>
+                    <option value="mysql"{{v db_mysql/}}>MySQL</option>
+                    <option value="hsqldb"{{v db_hsqldb/}}>HSQLDB</option>
+                    <option value="oracle"{{v db_oracle/}}>Oracle</option>
+                </select>
+            </label>
+            <div class="demo-q-toggles">
+                <label class="demo-q-toggle"><input type="checkbox" name="stock"{{v stock_checked/}}> In stock only</label>
+                <label class="demo-q-toggle"><input type="checkbox" name="limit"{{v limit_checked/}}> Top 5</label>
+                <label class="demo-q-toggle"><input type="checkbox" name="offset"{{v offset_checked/}}> Skip the first 10</label>
+            </div>
+        </form>
+        <div class="demo-tpl-panel">
+            <div class="demo-tpl-label">the query you build in Java</div>
+            <pre class="demo-tpl-src"><code class="language-java"><!--v code/--></code></pre>
+        </div>
+        <div class="demo-tpl-panel">
+            <div class="demo-tpl-label">the SQL RIFE2 generates for <!--v db_label/--></div>
+            <pre class="demo-tpl-src"><code class="language-sql demo-query-sql"><!--v sql/--></code></pre>
+        </div>
+        <!--v note/-->
+    </div>
+<!--/bv-->
+    <p class="demo-note">The same Java, genuinely different SQL: MySQL writes the boolean as <code>1</code>, HSQLDB puts <code>LIMIT</code> right after <code>SELECT</code>, and Oracle has no <code>LIMIT</code> or <code>OFFSET</code> at all, which RIFE2 knows.</p>
+</main>
+</body>
+</html>
+<!--b note_unsupported--><p class="demo-query-note"><!--v unsupported/--> has no <code>LIMIT</code> keyword, so RIFE2 refuses that clause rather than emit SQL it cannot run. The statement above is shown without it.</p><!--/b-->

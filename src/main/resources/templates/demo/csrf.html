@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live CSRF protection demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#csrf">Back to RIFE2</a></p>
+    <h1>CSRF Protection</h1>
+    <p>A state-changing <code>POST</code> is guarded by <code>before(new CsrfProtected())</code>. The real verification runs out of container: the legitimate form carries the token the server handed out, while a forged cross-site request cannot read it.</p>
+    <!--v stage/-->
+    <p class="demo-note">The token lives in an HttpOnly cookie and a matching form field. Another site can make the browser send the cookie, but cannot read the field, so its request is refused before the route runs.</p>
+</main>
+</body>
+</html>
+<!--bv stage-->
+    <div class="demo-stage">
+        <!--v result/-->
+        <form class="demo-csrf-form" method="get" action="{{v run_url/}}"
+              hx-get="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+            <p class="demo-csrf-scenario"><code>POST /transfer</code> moves $100. Only a request with a token matching the cookie is allowed to run.</p>
+            <button type="submit" name="forge" value="false" class="demo-btn">Submit the real form</button>
+            <button type="submit" name="forge" value="true" class="demo-btn demo-btn-ghost">Forge a cross-site request</button>
+        </form>
+    </div>
+<!--/bv-->
+<!--b result_accepted-->
+<div class="demo-test result-pass">
+    <span class="demo-test-badge">200 OK</span>
+    <div class="demo-test-line">The token matched the cookie, so the route ran: <code>{{v outcome/}}</code></div>
+</div>
+<!--/b-->
+<!--b result_refused-->
+<div class="demo-test result-fail">
+    <span class="demo-test-badge">403 FORBIDDEN</span>
+    <div class="demo-test-line">The token did not match, so <code>CsrfProtected</code> refused the request before the route ran.</div>
+</div>
+<!--/b-->

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live continuations demo - RIFE2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
+    <link rel="stylesheet" href="{{v webapp:rootUrl/}}css/style.css?{{v context:paramRandom/}}">
+    <script src="{{v webapp:rootUrl/}}js/htmx.min.js?{{v context:paramRandom/}}"></script>
+</head>
+<body>
+<main class="demo">
+    <p class="demo-back"><a href="{{v route:.home/}}#continuations">Back to RIFE2</a></p>
+    <h1>Continuations</h1>
+    <p>This counter's loop pauses on every click and resumes exactly where it left off, with its <code>count</code> variable intact. No session handling, no state machine. Every visitor gets an independent counter.</p>
+    <!--v stage/-->
+    <p class="demo-note">Powered by RIFE2 web continuations. Open this in a second tab and the two counters run independently.</p>
+</main>
+</body>
+</html>
+<!--bv stage--><div class="demo-stage"><!--v body/--></div><!--/bv-->
+<!--b counting-->
+<div class="demo-counter">{{v count/}}</div>
+<a class="demo-btn" href="{{v action/}}"
+   hx-get="{{v action/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">Add one</a>
+<!--/b-->
+<!--b done-->
+<div class="demo-counter">10</div>
+<p class="demo-done">done, the loop ran to completion, resuming from where it paused each time.</p>
+<a class="demo-btn" href="{{v webapp:rootUrl/}}demo/counter"
+   hx-get="{{v webapp:rootUrl/}}demo/counter" hx-target="closest .demo-stage" hx-swap="outerHTML">Start over</a>
+<!--/b-->
