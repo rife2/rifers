@@ -19,7 +19,7 @@ RIFE2 is designed to be understood statically. Routes are fields, elements are c
 - [Elements](https://github.com/rife2/rife2/wiki/Elements): the unit of request handling, written as a class or a lambda
 - [Field Annotations](https://github.com/rife2/rife2/wiki/Field-Annotations): bind request parameters, path info, cookies, headers and bodies to element fields
 - [Continuations](https://github.com/rife2/rife2/wiki/Continuations): pause a running method across requests and resume with locals intact
-- [Server-Sent Events](https://github.com/rife2/rife2/wiki/Server-Sent-Events): push to every connected client from anywhere with a broadcaster
+- [Server-Sent Events](https://github.com/rife2/rife2/wiki/Server-Sent-Events): broadcasters push from anywhere to every connected client or a filtered subset
 - [htmx Support](https://github.com/rife2/rife2/wiki/htmx-Support): serve HTML fragments, read and set HX-* headers, and trigger client events, htmx is not a dependency
 - [Dependency Injection](https://github.com/rife2/rife2/wiki/Dependency-Injection): pass services into elements instead of looking them up
 - [Out-of-container Testing](https://github.com/rife2/rife2/wiki/Out-of-container-Testing): drive forms and links in memory, with no running server
