@@ -29,7 +29,9 @@
     --radius-control: 5px;
 
     /* widths */
-    --content-width: min(720px, 90vw);
+    /* percent resolves against the containing block, so content tracks the
+       width .content actually has; 90vw ignored its margins and overflowed */
+    --content-width: min(720px, 100%);
 }
 body {
     background: var(--main-background-color);
@@ -172,7 +174,10 @@ a:hover {
     color: #eeeeee;
     font-weight: 300;
 }
-.examples, .examples [role=tabpanel], .content .examples pre {
+/* only the example code blocks themselves, a descendant selector would also
+   catch the pre elements inside the live demo stages and push them out of
+   their own panels */
+.examples, .examples [role=tabpanel], .content .examples [role=tabpanel] > pre {
     width: var(--content-width);
     max-width: var(--content-width);
     box-sizing: border-box;
@@ -248,12 +253,17 @@ a:hover {
     background: var(--code-background-color);
     border-radius: var(--radius);
     padding: 0.7em 0.9em 0.7em 1.3em;
+    max-width: 100%;
+    box-sizing: border-box;
 }
+/* the command wraps only when it has to, so a long one-liner stays inside the
+   pill at every width instead of pushing out of it */
 .install code {
     font-family: var(--mono-font);
     font-size: 16px;
     color: #eeeeee;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
+    min-width: 0;
 }
 .install code::before {
     content: "$ ";
@@ -1372,15 +1382,9 @@ img.powered {
     .install {
         gap: 0.8em;
         padding: 0.6em 0.7em 0.6em 1em;
-        max-width: 100%;
-        box-sizing: border-box;
     }
-    /* long commands wrap instead of overflowing, the copy button does the copying */
     .install code {
         font-size: min(16px, 3.4vw);
-        white-space: normal;
-        overflow-wrap: anywhere;
-        min-width: 0;
     }
     .bld-matrix {
         display: block;
