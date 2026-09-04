@@ -41,6 +41,7 @@ RIFE2 is designed to be understood statically. Routes are fields, elements are c
 - [Metadata Merging](https://github.com/rife2/rife2/wiki/Metadata-Merging): keep a bean a plain POJO and declare its constraints in a companion class
 - [Validation](https://github.com/rife2/rife2/wiki/Validation): server-side validation, groupable, with a precise error per field
 - [Form Generation](https://github.com/rife2/rife2/wiki/Form-Generation): generate and repopulate forms and fields from a bean's constraints
+- [Optional Bean Properties](https://github.com/rife2/rife2/wiki/Optional-Bean-Properties): getters may return Optional while fields and setters keep the plain type, and every bean feature keeps working
 
 ## Authentication and security
 - [Authentication Sessions](https://github.com/rife2/rife2/wiki/Authentication-Sessions): create and manage sessions once credentials are validated
