@@ -80,7 +80,9 @@ public class MigrationsDemo implements Element {
             schema = readSchema(keepAlive);
         } finally {
             keepAlive.close();
-            datasource.cleanup();
+            // only the pool, cleanup() would also deregister the driver process-wide
+            // and leave the next request without one when it came from WEB-INF/lib
+            datasource.getPool().cleanup();
         }
 
         var t = c.template("demo/migrations");

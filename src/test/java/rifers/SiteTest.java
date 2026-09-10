@@ -8,8 +8,11 @@ import rife.test.MockConversation;
 import rife.test.MockRequest;
 import rife.tools.StringUtils;
 
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static rife.engine.RequestMethod.POST;
@@ -569,6 +572,49 @@ public class SiteTest {
         assertTrue(hostileCode.contains("package _123._class;"), "invalid package segments become valid identifiers");
         assertTrue(hostileCode.contains("name = \"bad\\\"name\""), "a quote in the name is escaped inside the Java string");
         assertFalse(hostileCode.contains("\"bad\"name\""), "the unescaped quote never reaches the output");
+    }
+
+    @Test
+    void verifyTheH2DemosLeaveTheDriverRegistered() throws Exception {
+        // in a container the driver sits in WEB-INF/lib, where DriverManager's service
+        // loader never sees it, so the first Datasource to load it is the only thing
+        // that registers it and a cleanup() that deregisters it strands every request
+        // after the first; on the test classpath the service loader hides all of that,
+        // so the arrangement has to be rebuilt here to see it at all
+        var jars = new ArrayList<URL>();
+        for (var dir : new String[]{"lib/compile", "lib/runtime"}) {
+            try (var files = Files.list(Path.of(dir))) {
+                files.map(Path::toString)
+                    .filter(f -> f.endsWith(".jar") && !f.endsWith("-sources.jar") && !f.contains("-agent"))
+                    .forEach(f -> jars.add(toUrl(f)));
+            }
+        }
+        try (var container = new URLClassLoader(jars.toArray(new URL[0]), ClassLoader.getPlatformClassLoader())) {
+            var datasource = Class.forName("rife.database.Datasource", true, container);
+            var construct = datasource.getConstructor(String.class, String.class, String.class, String.class, int.class);
+            // the same lifecycle the migrations and gqm demos run, once per request
+            for (var request = 1; request <= 3; request++) {
+                var ds = construct.newInstance("org.h2.Driver", "jdbc:h2:mem:probe" + request, "sa", "", 5);
+                var connection = datasource.getMethod("getConnection").invoke(ds);
+                connection.getClass().getMethod("close").invoke(connection);
+                var pool = datasource.getMethod("getPool").invoke(ds);
+                pool.getClass().getMethod("cleanup").invoke(pool);
+            }
+        }
+        // and the demos have to keep using that pool-only cleanup
+        for (var demo : new String[]{"GqmDemo", "MigrationsDemo"}) {
+            var source = Files.readString(Path.of("src/main/java/rifers/elements/demo/" + demo + ".java"));
+            assertTrue(source.contains("getPool().cleanup()"), demo + " has to clean up only the pool");
+            assertFalse(source.contains("datasource.cleanup()"), demo + " must not deregister the driver");
+        }
+    }
+
+    static URL toUrl(String file) {
+        try {
+            return Path.of(file).toUri().toURL();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
