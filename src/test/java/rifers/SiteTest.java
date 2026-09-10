@@ -13,6 +13,7 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static rife.engine.RequestMethod.POST;
@@ -652,6 +653,25 @@ public class SiteTest {
         for (var artifact : new String[]{"h2", "jsoup"}) {
             assertTrue(packaged.contains("\"" + artifact + "\""),
                 artifact + " is loaded at run time, so it has to be in a scope the war packages");
+        }
+    }
+
+    @Test
+    void verifyNoPageNamesAJUnitVersionItDoesNotShip() throws Exception {
+        // "JUnit 5" outlived junit-jupiter 5.x on both pages and nothing noticed, so
+        // any major named in prose now has to match the dependency underneath it
+        var config = Files.readString(Path.of("src/main/resources/templates/demo/bldconfig.html"));
+        var shipped = Pattern.compile("junit-jupiter\",\\s*\n?\\s*version\\((\\d+)").matcher(config);
+        assertTrue(shipped.find(), "the configurator has to pin a junit-jupiter version");
+        var major = shipped.group(1);
+        try (var templates = Files.walk(Path.of("src/main/resources/templates"))) {
+            for (var template : templates.filter(f -> f.toString().endsWith(".html")).toList()) {
+                var named = Pattern.compile("JUnit\\s+(\\d+)").matcher(Files.readString(template));
+                while (named.find()) {
+                    assertEquals(major, named.group(1),
+                        template.getFileName() + " names JUnit " + named.group(1) + " but ships junit-jupiter " + major);
+                }
+            }
         }
     }
 
