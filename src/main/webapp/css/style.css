@@ -1350,6 +1350,14 @@ img.powered {
     :root {
         --content-width: auto;
     }
+    /* fourteen tabs wrap over five rows on a phone while every row still ends
+       short, so tighten the run rather than the labels to win back a row */
+    .example-tabs {
+        gap: 0 0.8em;
+    }
+    .example-tabs [role=tab] {
+        font-size: 15px;
+    }
     .header {
         flex-direction: column;
         align-items: baseline;
