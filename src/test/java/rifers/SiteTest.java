@@ -641,6 +641,10 @@ public class SiteTest {
                     .replaceAll("(?s)\\}.*", "").contains("instrument()"),
                 command + "() has to instrument before packaging");
         }
+        // the embedded server turns async on by itself, a container never does
+        var descriptor = Files.readString(Path.of(WEBAPP, "WEB-INF/web.xml"));
+        assertTrue(descriptor.contains("<async-supported>true</async-supported>"),
+            "the RIFE2 filter has to declare async support or SSE fails in a container");
         // test and standalone scope both keep these demos green here, only a packaged
         // scope also gets them onto the container's classpath
         var packaged = build.replaceAll("(?s).*scope\\(runtime\\)", "")

@@ -5,6 +5,7 @@
     <filter>
         <filter-name>RIFE2</filter-name>
         <filter-class>rife.servlet.RifeFilter</filter-class>
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>rifeSiteClass</param-name>
             <param-value>rifers.RifersSite</param-value>
