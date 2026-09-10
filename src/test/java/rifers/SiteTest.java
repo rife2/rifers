@@ -9,6 +9,7 @@ import rife.test.MockRequest;
 import rife.tools.StringUtils;
 
 import java.net.URL;
+import java.nio.ByteBuffer;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -654,6 +655,37 @@ public class SiteTest {
             assertTrue(packaged.contains("\"" + artifact + "\""),
                 artifact + " is loaded at run time, so it has to be in a scope the war packages");
         }
+    }
+
+    @Test
+    void verifyOgImagesMatchTheirDeclaredSize() throws Exception {
+        // the bld card was 1200x632 against a declared 630 through three revisions and
+        // nothing noticed, because a wrong size only shows up once a platform crops it
+        var common = Files.readString(Path.of("src/main/resources/templates/common.html"));
+        var declared = new int[2];
+        var dimension = Pattern.compile("og:image:(width|height)\" content=\"(\\d+)").matcher(common);
+        while (dimension.find()) {
+            declared["width".equals(dimension.group(1)) ? 0 : 1] = Integer.parseInt(dimension.group(2));
+        }
+        assertTrue(declared[0] > 0 && declared[1] > 0, "the page has to declare an og:image size");
+        var referenced = 0;
+        try (var elements = Files.walk(Path.of("src/main/java/rifers/elements"))) {
+            for (var element : elements.filter(f -> f.toString().endsWith(".java")).toList()) {
+                var image = Pattern.compile("\"og_image\",\\s*\"([^\"]+)\"").matcher(Files.readString(element));
+                while (image.find()) {
+                    var file = Path.of(WEBAPP, "images", image.group(1));
+                    assertTrue(Files.exists(file), "missing og image " + image.group(1));
+                    var png = Files.readAllBytes(file);
+                    // the IHDR chunk carries the real size, no image library needed
+                    var width = ByteBuffer.wrap(png, 16, 4).getInt();
+                    var height = ByteBuffer.wrap(png, 20, 4).getInt();
+                    assertEquals(declared[0] + "x" + declared[1], width + "x" + height,
+                        image.group(1) + " does not match the declared og:image size");
+                    referenced++;
+                }
+            }
+        }
+        assertTrue(referenced >= 2, "both pages have to declare an og image, found " + referenced);
     }
 
     @Test
