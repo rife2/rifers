@@ -25,10 +25,10 @@ Go to:
 
 The resulting archive will be in `build/dist`.
 
-The counter and workflow demos use RIFE2's continuations, which need the RIFE2
-agent at runtime. `./bld run` applies it automatically; when you deploy the WAR
-to an external servlet container you must add the agent to that container's JVM
-yourself, for example with `-javaagent:/path/to/rife2-agent-<version>.jar`.
+The counter and workflow demos use RIFE2's continuations. `./bld run` applies
+the RIFE2 agent automatically, and `./bld war` and `./bld uberjar` instrument
+the classes ahead of time, so the deployed archive doesn't need the agent on the
+container's JVM.
 
 
 ## Making an UberJar
@@ -41,5 +41,5 @@ yourself, for example with `-javaagent:/path/to/rife2-agent-<version>.jar`.
 Then run it with:
 
 ```bash
-java -jar build/dist/rifers-1.0.0-uber.jar
+java -jar build/dist/rifers-2.0.1-uber.jar
 ```

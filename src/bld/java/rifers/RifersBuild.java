@@ -14,7 +14,7 @@ public class RifersBuild extends WebProject {
         name = "Rifers";
         mainClass = "rifers.RifersSite";
         uberJarMainClass = "rifers.RifersSiteUber";
-        version = version(2,0,0);
+        version = version(2,0,1);
 
         downloadSources = true;
         autoDownloadPurge = true;
@@ -38,8 +38,24 @@ public class RifersBuild extends WebProject {
             // the testing demo drives forms out of container, which RIFE2 parses with jsoup
             .include(dependency("org.jsoup", "jsoup", version(1,23,2)));
 
+        // the archives ship the precompiled template classes, not the template
+        // sources, so a type left out here only goes missing once deployed
         precompileOperation()
-            .templateTypes(HTML);
+            .templateTypes(HTML, TXT);
+    }
+
+    // the deployed archives carry no agent, so instrument the continuations
+    // ahead of time instead of relying on the container's JVM to do it
+    @Override
+    public void war() throws Exception {
+        instrument();
+        super.war();
+    }
+
+    @Override
+    public void uberjar() throws Exception {
+        instrument();
+        super.uberjar();
     }
 
     public static void main(String[] args) {

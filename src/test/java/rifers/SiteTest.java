@@ -572,10 +572,36 @@ public class SiteTest {
     }
 
     @Test
+    void verifyTheDeployedArchivesNeedNothingAddedToRun() throws Exception {
+        // out of container everything resolves from the source tree and the agent is
+        // applied for us, so neither of these gaps can fail a test, they only surface
+        // once the war runs in a container, which is why they are asserted on the build
+        var build = Files.readString(Path.of("src/bld/java/rifers/RifersBuild.java"));
+        var types = build.replaceAll("(?s).*\\.templateTypes\\(([^)]*)\\).*", "$1");
+        assertNotEquals(build, types, "the build has to declare the precompiled template types");
+        try (var templates = Files.walk(Path.of("src/main/resources/templates"))) {
+            templates.filter(Files::isRegularFile)
+                .map(f -> f.getFileName().toString())
+                .filter(f -> f.lastIndexOf('.') > 0)
+                .map(f -> f.substring(f.lastIndexOf('.') + 1).toUpperCase())
+                .filter(t -> !"DS_STORE".equals(t))
+                .distinct()
+                .forEach(t -> assertTrue(types.contains(t),
+                    "templates/*." + t.toLowerCase() + " exists, so " + t + " has to be precompiled, got: " + types));
+        }
+        // the continuations demos throw ContinuationsNotActiveException without this
+        for (var command : new String[]{"war", "uberjar"}) {
+            assertTrue(build.replaceAll("(?s).*public void " + command + "\\(\\)[^{]*\\{", "")
+                    .replaceAll("(?s)\\}.*", "").contains("instrument()"),
+                command + "() has to instrument before packaging");
+        }
+    }
+
+    @Test
     void verifyBldConfigPinsTheShippingRife2Version() {
-        // the configurator claims to generate what bld create-rife2 scaffolds, so its
-        // pinned rife2 version has to be the one this site ships against; while the site
-        // tracks a snapshot the pin legitimately trails it, pointing at the last release
+        // the configurator shows what bld create-rife2 scaffolds, so its pinned rife2
+        // has to be the one this site ships against; on a snapshot the pin trails it
+        // and points at the last release instead
         var running = rife.Version.getVersion();
         if (running.contains("-")) {
             return;
