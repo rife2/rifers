@@ -572,6 +572,23 @@ public class SiteTest {
     }
 
     @Test
+    void verifyBldConfigPinsTheShippingRife2Version() {
+        // the configurator claims to generate what bld create-rife2 scaffolds, so its
+        // pinned rife2 version has to be the one this site ships against; while the site
+        // tracks a snapshot the pin legitimately trails it, pointing at the last release
+        var running = rife.Version.getVersion();
+        if (running.contains("-")) {
+            return;
+        }
+        var expected = "version(" + running.replace('.', ',') + ")";
+        var webCode = new MockConversation(new RifersSite())
+            .doRequest("/demo/bld-config", new MockRequest().parameter("type", "web"))
+            .getParsedHtml().getDocument().selectFirst(".bld-config-out").text();
+        assertTrue(webCode.contains(expected),
+            "expected the configurator to pin rife2 " + expected + ", got: " + webCode);
+    }
+
+    @Test
     void verifyActiveNavIndicatesCurrentPage() {
         var m = new MockConversation(new RifersSite());
         var homeActive = m.doRequest("/").getParsedHtml().getDocument().select("nav.nav a[aria-current=page]");
