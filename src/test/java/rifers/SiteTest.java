@@ -574,8 +574,8 @@ public class SiteTest {
     @Test
     void verifyTheDeployedArchivesNeedNothingAddedToRun() throws Exception {
         // out of container everything resolves from the source tree and the agent is
-        // applied for us, so neither of these gaps can fail a test, they only surface
-        // once the war runs in a container, which is why they are asserted on the build
+        // applied for us, so none of these gaps can fail a test, they only surface once
+        // the war runs in a container, which is why they are asserted on the build
         var build = Files.readString(Path.of("src/bld/java/rifers/RifersBuild.java"));
         var types = build.replaceAll("(?s).*\\.templateTypes\\(([^)]*)\\).*", "$1");
         assertNotEquals(build, types, "the build has to declare the precompiled template types");
@@ -594,6 +594,14 @@ public class SiteTest {
             assertTrue(build.replaceAll("(?s).*public void " + command + "\\(\\)[^{]*\\{", "")
                     .replaceAll("(?s)\\}.*", "").contains("instrument()"),
                 command + "() has to instrument before packaging");
+        }
+        // test and standalone scope both keep these demos green here, only a packaged
+        // scope also gets them onto the container's classpath
+        var packaged = build.replaceAll("(?s).*scope\\(runtime\\)", "")
+            .replaceAll("(?s)\\bscope\\((?!runtime).*", "");
+        for (var artifact : new String[]{"h2", "jsoup"}) {
+            assertTrue(packaged.contains("\"" + artifact + "\""),
+                artifact + " is loaded at run time, so it has to be in a scope the war packages");
         }
     }
 
