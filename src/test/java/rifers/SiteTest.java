@@ -577,12 +577,10 @@ public class SiteTest {
     }
 
     @Test
-    void verifyTheH2DemosLeaveTheDriverRegistered() throws Exception {
-        // in a container the driver sits in WEB-INF/lib, where DriverManager's service
-        // loader never sees it, so the first Datasource to load it is the only thing
-        // that registers it and a cleanup() that deregisters it strands every request
-        // after the first; on the test classpath the service loader hides all of that,
-        // so the arrangement has to be rebuilt here to see it at all
+    void verifyTheH2DemosSurviveRepeatedCleanup() throws Exception {
+        // in a container the driver sits in WEB-INF/lib where DriverManager's service loader
+        // never sees it, which the test classpath hides, so this rebuilds that arrangement
+        // to catch a RIFE2 whose cleanup() strands every request after the first
         var jars = new ArrayList<URL>();
         for (var dir : new String[]{"lib/compile", "lib/runtime"}) {
             try (var files = Files.list(Path.of(dir))) {
@@ -599,15 +597,8 @@ public class SiteTest {
                 var ds = construct.newInstance("org.h2.Driver", "jdbc:h2:mem:probe" + request, "sa", "", 5);
                 var connection = datasource.getMethod("getConnection").invoke(ds);
                 connection.getClass().getMethod("close").invoke(connection);
-                var pool = datasource.getMethod("getPool").invoke(ds);
-                pool.getClass().getMethod("cleanup").invoke(pool);
+                datasource.getMethod("cleanup").invoke(ds);
             }
-        }
-        // and the demos have to keep using that pool-only cleanup
-        for (var demo : new String[]{"GqmDemo", "MigrationsDemo"}) {
-            var source = Files.readString(Path.of("src/main/java/rifers/elements/demo/" + demo + ".java"));
-            assertTrue(source.contains("getPool().cleanup()"), demo + " has to clean up only the pool");
-            assertFalse(source.contains("datasource.cleanup()"), demo + " must not deregister the driver");
         }
     }
 
