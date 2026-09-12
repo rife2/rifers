@@ -41,5 +41,5 @@ container's JVM.
 Then run it with:
 
 ```bash
-java -jar build/dist/rifers-2.0.9-uber.jar
+java -jar build/dist/rifers-2.1.0-uber.jar
 ```
