@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Live generic query manager demo - RIFE2</title>
+    <!--bv demo_title-->Live generic query manager demo - RIFE2<!--/bv-->
+    <!--bv demo_image-->og-demo-gqm.png<!--/bv-->
+    <!--i demo/preview/-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0d0d0d">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Source+Sans+3:wght@300;400&display=swap">
@@ -28,6 +30,8 @@
             <button type="submit" class="demo-btn">Save book</button>
         </form>
     </div>
+    <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/GqmDemo.java">View the source: GqmDemo.java</a>
+        <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/gqm.html">and its template: gqm.html</a></p>
 <!--/bv-->
     <p class="demo-note">Every request builds a private in-memory database, seeds two books, saves yours next to them, reads them all back through the manager, then discards the database. Nothing is kept between requests, so it is only here to show the save and restore round-trip. Saving also sends an <code>HX-Trigger</code> response header, so the page flashes a toast from a client event with no extra request.</p>
 </main>

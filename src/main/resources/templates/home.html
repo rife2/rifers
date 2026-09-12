@@ -76,9 +76,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.hello/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Served live by rife2.com, which is itself a RIFE2 app.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/hello.html">and its template: hello.html</a></p>
+                <p class="demo-note">Served live by rife2.com, which is itself a RIFE2 app.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -88,9 +86,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.link/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">The link's URL is generated from the route. Click it and Hello World appears.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/link.html">and its template: link.html</a></p>
+                <p class="demo-note">The link's URL is generated from the route. Click it and Hello World appears.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -100,9 +96,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.form/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">One element serves both the GET that shows the form and the POST that shows the result.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/FormDemo.java">View the source: FormDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/form.html">and its template: form.html</a></p>
+                <p class="demo-note">One element serves both the GET that shows the form and the POST that shows the result.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -112,9 +106,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.validation/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Submit the form and each field that breaks its constraints gets a precise error. Try an empty name, a bad email, or an age like 5. The rules can also live in a separate metadata class, keeping the bean a plain POJO.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/ValidationDemo.java">View the source: ValidationDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/validation.html">and its template: validation.html</a></p>
+                <p class="demo-note">Submit the form and each field that breaks its constraints gets a precise error. Try an empty name, a bad email, or an age like 5. The rules can also live in a separate metadata class, keeping the bean a plain POJO.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -124,9 +116,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.csrf/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">The real verification runs out of container. A legitimate submit is accepted, a forged cross-site request gets 403.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/CsrfDemo.java">View the source: CsrfDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/csrf.html">and its template: csrf.html</a></p>
+                <p class="demo-note">The real verification runs out of container. A legitimate submit is accepted, a forged cross-site request gets 403.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -151,8 +141,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="demo-note">Change the name and the live JSON API answers. The record's fields become the keys, with no annotations. This calls the running endpoint and shows exactly what it returns.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/JsonDemo.java">View the source: JsonDemo.java</a></p>
+                <p class="demo-note">Change the name and the live JSON API answers. The record's fields become the keys, with no annotations. This calls the running endpoint and shows exactly what it returns.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -162,9 +151,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.templates/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">The same logic-less template renders both pages, and the highlighted lines above are the Java branch that just ran. Flip the state and only the Java's choice of block changes.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/TemplatesDemo.java">View the source: TemplatesDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/templates.html">and its template: templates.html</a></p>
+                <p class="demo-note">The same logic-less template renders both pages, and the highlighted lines above are the Java branch that just ran. Flip the state and only the Java's choice of block changes.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -174,9 +161,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.htmx/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Type to filter: each keystroke fetches only the updated list, returned with <code>printHtmxFragment</code> from a template block rather than as a whole page.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/HtmxDemo.java">View the source: HtmxDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/htmx.html">and its template: htmx.html</a></p>
+                <p class="demo-note">Type to filter: each keystroke fetches only the updated list, returned with <code>printHtmxFragment</code> from a template block rather than as a whole page.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -187,9 +172,7 @@
                 <div class="demo-live" hx-get="{{v route:.demos.counter/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
                 <p class="demo-note">Every visitor gets their own counter.
-                    <a href="{{v route:.demos.counter/}}" target="_blank" rel="noopener">Open in its own tab</a> and it counts independently.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/CounterDemo.java">View the source: CounterDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/counter.html">and its template: counter.html</a></p>
+                    <a href="{{v route:.demos.counter/}}" target="_blank" rel="noopener">Open in its own tab</a> and it counts independently.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -200,9 +183,7 @@
                 <div class="demo-live" hx-get="{{v route:.demos.sse/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
                 <p class="demo-note">The clock is pushed once per second, and every tap is broadcast to all watchers.
-                    <a href="{{v route:.demos.sse/}}" target="_blank" rel="noopener">Open in its own tab</a>, tap in one, and watch both jump.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/sse.html">and its template: sse.html</a></p>
+                    <a href="{{v route:.demos.sse/}}" target="_blank" rel="noopener">Open in its own tab</a>, tap in one, and watch both jump.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -212,9 +193,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.workflow/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">A warehouse, a courier and a notifier hand a parcel down the line, each written top to bottom and suspended mid-method by <code>pauseForEvent</code>. Place an order and it runs its own workflow to completion in one request.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/WorkflowDemo.java">View the source: WorkflowDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/workflow.html">and its template: workflow.html</a></p>
+                <p class="demo-note">A warehouse, a courier and a notifier hand a parcel down the line, each written top to bottom and suspended mid-method by <code>pauseForEvent</code>. Place an order and it runs its own workflow to completion in one request.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -224,9 +203,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.migrations/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Step up and back to watch the real schema change. Each step runs against its own throwaway database.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/MigrationsDemo.java">View the source: MigrationsDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/migrations.html">and its template: migrations.html</a></p>
+                <p class="demo-note">Step up and back to watch the real schema change. Each step runs against its own throwaway database.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -236,9 +213,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.queries/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Pick a database and only the generated SQL changes. One type-safe query, tailored to each dialect, and RIFE2 even rejects a clause a database can't run.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/QueriesDemo.java">View the source: QueriesDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/queries.html">and its template: queries.html</a></p>
+                <p class="demo-note">Pick a database and only the generated SQL changes. One type-safe query, tailored to each dialect, and RIFE2 even rejects a clause a database can't run.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -248,9 +223,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.gqm/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Add a book and the manager saves it and reads it straight back. Each request runs against its own private in-memory database that is discarded afterward, so nothing accumulates between requests.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/GqmDemo.java">View the source: GqmDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/gqm.html">and its template: gqm.html</a></p>
+                <p class="demo-note">Add a book and the manager saves it and reads it straight back. Each request runs against its own private in-memory database that is discarded afterward, so nothing accumulates between requests.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -260,9 +233,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.test/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">The test finds the form in the HTML, fills it, and submits it, all in-process. Change the expected value to make it fail.
-                    <a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/TestDemo.java">View the source: TestDemo.java</a>
-                    <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/test.html">and its template: test.html</a></p>
+                <p class="demo-note">The test finds the form in the HTML, fills it, and submits it, all in-process. Change the expected value to make it fail.</p>
             </details>
         </div>
     </div>
