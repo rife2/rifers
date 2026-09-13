@@ -14,16 +14,16 @@ public class RifersBuild extends WebProject {
         name = "Rifers";
         mainClass = "rifers.RifersSite";
         uberJarMainClass = "rifers.RifersSiteUber";
-        version = version(2,1,1);
+        version = version(2,2,0);
 
         downloadSources = true;
         autoDownloadPurge = true;
 
-        repositories = List.of(MAVEN_CENTRAL, RIFE2_RELEASES, RIFE2_SNAPSHOTS);
+        repositories = List.of(MAVEN_CENTRAL, RIFE2_RELEASES);
         scope(compile)
-            .include(dependency("com.uwyn.rife2", "rife2", version(1,10,1,"SNAPSHOT")));
+            .include(dependency("com.uwyn.rife2", "rife2", version(1,10,1)));
         // the instrumentation agent enables web continuations, activated for run and test
-        useRife2Agent(version(1,10,1,"SNAPSHOT"));
+        useRife2Agent(version(1,10,1));
         scope(test)
             .include(dependency("org.jsoup", "jsoup", version(1,23,2)))
             .include(dependency("org.junit.jupiter", "junit-jupiter", version(6,1,3)))
