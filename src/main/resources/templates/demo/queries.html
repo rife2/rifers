@@ -21,10 +21,11 @@
     <p>Build a query in type-safe Java instead of writing SQL strings. Toggle the clauses on and off and pick a database, and RIFE2 renders the same Java query as SQL in that database's own dialect. Nothing connects, the dialect comes from the driver name alone.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <form class="demo-tpl-form" method="get" action="{{v run_url/}}"
               hx-get="{{v run_url/}}" hx-trigger="change, submit"
-              hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-target="closest .demo-frame" hx-swap="outerHTML">
             <label class="demo-tpl-field">Database
                 <select name="db">
                     <option value="postgresql"{{v db_postgresql/}}>PostgreSQL</option>
@@ -51,6 +52,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/QueriesDemo.java">View the source: QueriesDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/queries.html">and its template: queries.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">The same Java, genuinely different SQL: MySQL writes the boolean as <code>1</code>, HSQLDB puts <code>LIMIT</code> right after <code>SELECT</code>, and Oracle has no <code>LIMIT</code> or <code>OFFSET</code> at all, which RIFE2 knows.</p>
 </main>

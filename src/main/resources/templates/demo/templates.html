@@ -21,10 +21,11 @@
     <p>A RIFE2 template is an ordinary file with no logic, HTML here, but XML, SVG, text and JSON work the same way. Pick a state and watch: the <em>template never changes</em>, the Java picks a different named block, and you get a different page. The logic lives in the Java, not the template.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <form class="demo-tpl-form" method="get" action="{{v run_url/}}"
               hx-get="{{v run_url/}}" hx-trigger="change, keyup changed delay:250ms, submit"
-              hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-target="closest .demo-frame" hx-swap="outerHTML">
             <label class="demo-tpl-field">Show
                 <select name="state">
                     <option value="welcome"{{v state_welcome/}}>welcome</option>
@@ -50,6 +51,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/TemplatesDemo.java">View the source: TemplatesDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/templates.html">and its template: templates.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">The same logic-less template renders both states. Change <em>Show</em> and only the Java's choice of block changes, never the template.</p>
 </main>

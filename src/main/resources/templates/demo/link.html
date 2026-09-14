@@ -22,11 +22,13 @@
 </body>
 </html>
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <a class="demo-btn" href="{{v url/}}"
-           hx-get="{{v url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">Hello</a>
+           hx-get="{{v url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">Hello</a>
         <p class="demo-url"><code><!--v url/--></code></p>
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/link.html">and its template: link.html</a></p>
+</div>
 <!--/bv-->

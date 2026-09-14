@@ -18,6 +18,7 @@
     <p>Step through the schema versions. Each step runs the real migrations against a fresh in-memory database and reads back the actual schema. Rolling back genuinely executes the <code>down()</code> migrations.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <p class="demo-version">Schema version <!--v version/--> of <!--v max/--></p>
         <div class="demo-schema"><!--v schema/--></div>
@@ -25,6 +26,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/MigrationsDemo.java">View the source: MigrationsDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/migrations.html">and its template: migrations.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">A private database per request, destroyed before the response is sent. Nothing accumulates, whatever the traffic.</p>
 </main>
@@ -34,6 +36,6 @@
 <!--b schema_column--><div class="demo-schema-col"><span class="demo-schema-colname"><!--v column_name/--></span><span class="demo-schema-coltype"><!--v column_type/--></span></div><!--/b-->
 <!--b schema_empty--><p class="demo-schema-empty">empty database, no tables yet</p><!--/b-->
 <!--b step_back--><a class="demo-btn demo-btn-ghost" href="{{v back_url/}}"
-   hx-get="{{v back_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">&#9664; Roll back</a><!--/b-->
+   hx-get="{{v back_url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">&#9664; Roll back</a><!--/b-->
 <!--b step_up--><a class="demo-btn" href="{{v up_url/}}"
-   hx-get="{{v up_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">Migrate up &#9654;</a><!--/b-->
+   hx-get="{{v up_url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">Migrate up &#9654;</a><!--/b-->

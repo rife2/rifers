@@ -22,10 +22,11 @@
 </body>
 </html>
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <!--v result/-->
         <form class="demo-test-form" method="get" action="{{v run_url/}}"
-              hx-get="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-get="{{v run_url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">
             <label>assert submitting the form with <code>who = Ada</code> returns</label>
             <input type="text" name="expected" value="{{v expected/}}" aria-label="expected response">
             <button type="submit">Run test</button>
@@ -33,6 +34,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/TestDemo.java">View the source: TestDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/test.html">and its template: test.html</a></p>
+</div>
 <!--/bv-->
 <!--b result_pass-->
 <div class="demo-test result-pass">

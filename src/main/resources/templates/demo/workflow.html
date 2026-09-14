@@ -21,6 +21,7 @@
     <p>Coordinate concurrent tasks without managing threads, locks or queues. A warehouse, a courier and a notifier each run as plain, sequential Java that <em>pauses</em> on an event and resumes when the previous step informs it, all held together by RIFE2's continuations. Place an order and watch the three tasks wake up in turn and hand the parcel down the line.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage demo-wf">
         <button class="demo-wf-place" type="button"
                 hx-get="{{v place_url/}}" hx-target="#demo-wf-feed" hx-swap="afterbegin">Place an order</button>
@@ -33,6 +34,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/WorkflowDemo.java">View the source: WorkflowDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/workflow.html">and its template: workflow.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">No callbacks and no shared state: each task reads top to bottom, and <code>pauseForEvent</code> suspends it mid-method until the previous step responds. Every order runs its own workflow to completion inside one request.</p>
 </main>

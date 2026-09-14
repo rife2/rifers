@@ -22,10 +22,11 @@
     <div class="bld-config">
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <form class="bld-config-form" method="get" action="{{v run_url/}}"
               hx-get="{{v run_url/}}" hx-trigger="change, submit"
-              hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-target="closest .demo-frame" hx-swap="outerHTML">
             <label class="bld-field">Type
                 <select name="type" aria-label="project type">
                     <option value="app"{{v type_app/}}>Application</option>
@@ -80,6 +81,7 @@ public class <!--v buildClass/--> extends <!--v baseClass/--> {
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/BldConfigDemo.java">View the source: BldConfigDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/bldconfig.html">and its template: bldconfig.html</a></p>
+</div>
 <!--/bv-->
     </div>
     <p class="demo-note">The whole file is rendered by a RIFE2 template, so this page is itself a small bld and RIFE2 example. The RIFE2 web app option is exactly what <code>bld create-rife2</code> generates.</p>

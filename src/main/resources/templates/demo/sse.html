@@ -19,6 +19,7 @@
     <p>The time below is pushed from the server once per second over a single SSE connection, using RIFE2's <code>SseBroadcaster</code>. The tap tally is shared: a tap from anyone is broadcast to everyone. No polling, no page reloads. Open this page in a second tab and watch both stay in sync.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage" hx-ext="sse" sse-connect="{{v route:sseStream/}}">
         <div sse-swap="clock"><!--v clock_row/--></div>
         <p class="demo-taps"><span class="demo-tap-count" sse-swap="taps"><!--v taps_row/--></span> taps from everyone watching</p>
@@ -26,6 +27,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/DemoRouter.java">View the source: DemoRouter.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/sse.html">and its template: sse.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">The clock and the tap tally are both streamed live by rife2.com itself.</p>
 </main>

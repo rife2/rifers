@@ -22,6 +22,7 @@
 </body>
 </html>
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <form class="demo-form" action="{{v run_url/}}" method="post"
               hx-post="{{v run_url/}}" hx-target="next .demo-result" hx-swap="outerHTML">
@@ -32,6 +33,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/FormDemo.java">View the source: FormDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/form.html">and its template: form.html</a></p>
+</div>
 <!--/bv-->
 <!--b result_content--><div class="demo-result"><!--v greeting/--></div><!--/b-->
 <!--b greeting_filled--><p class="demo-clock">Hello <!--v name/-->!</p><!--/b-->

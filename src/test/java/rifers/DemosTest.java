@@ -1,6 +1,8 @@
 package rifers;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.FormElement;
 import org.junit.jupiter.api.Test;
 import rife.json.Json;
 import rife.json.JsonObject;
@@ -573,6 +575,38 @@ public class DemosTest extends SiteTestSupport {
         assertFalse(text.contains("demo-form"), "the form itself is not re-sent");
         assertFalse(text.contains("<html"), "no surrounding document");
         assertEquals("HX-Request", result.getHeader("Vary"), "the result fragment varies on HX-Request");
+    }
+
+    @Test
+    void verifyDemoInteractionsSwapOneElement() {
+        // an interaction replaces the element it targets with the fragment the
+        // demo prints, so that fragment has to be that one element: anything
+        // next to it, like the source links, piles up on every request
+        var interactions = 0;
+        var failures = new ArrayList<String>();
+        for (var path : DEMO_PATHS) {
+            var m = new MockConversation(new RifersSite());
+            var stage = Jsoup.parseBodyFragment(m.doRequest(path, new MockRequest().htmx()).getText()).body();
+            for (var trigger : stage.select("[hx-target^=closest][hx-swap=outerHTML]")) {
+                interactions++;
+                var target = trigger.attr("hx-target").substring("closest ".length());
+                var request = new MockRequest().htmx();
+                var url = trigger.attr("hx-get");
+                if (trigger.hasAttr("hx-post")) {
+                    url = trigger.attr("hx-post");
+                    request.method(POST);
+                }
+                if (trigger instanceof FormElement form) {
+                    form.formData().forEach(data -> request.parameter(data.key(), data.value()));
+                }
+                var swapped = Jsoup.parseBodyFragment(m.doRequest(url, request).getText()).body().children();
+                if (swapped.size() != 1 || !swapped.first().is(target)) {
+                    failures.add(path + " swaps in " + swapped.size() + " elements instead of its " + target);
+                }
+            }
+        }
+        assertTrue(interactions > 0, "no demo interactions were found");
+        assertEquals(new ArrayList<String>(), failures);
     }
 
     @Test

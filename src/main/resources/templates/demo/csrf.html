@@ -22,10 +22,11 @@
 </body>
 </html>
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <!--v result/-->
         <form class="demo-csrf-form" method="get" action="{{v run_url/}}"
-              hx-get="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-get="{{v run_url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">
             <p class="demo-csrf-scenario"><code>POST /transfer</code> moves $100. Only a request with a token matching the cookie is allowed to run.</p>
             <button type="submit" name="forge" value="false" class="demo-btn">Submit the real form</button>
             <button type="submit" name="forge" value="true" class="demo-btn demo-btn-ghost">Forge a cross-site request</button>
@@ -33,6 +34,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/CsrfDemo.java">View the source: CsrfDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/csrf.html">and its template: csrf.html</a></p>
+</div>
 <!--/bv-->
 <!--b result_accepted-->
 <div class="demo-test result-pass">

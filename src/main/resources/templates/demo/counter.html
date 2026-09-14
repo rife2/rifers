@@ -21,18 +21,19 @@
 </main>
 </body>
 </html>
-<!--bv stage--><div class="demo-stage"><!--v body/--></div>
+<!--bv stage--><div class="demo-frame"><div class="demo-stage"><!--v body/--></div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/CounterDemo.java">View the source: CounterDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/counter.html">and its template: counter.html</a></p>
+</div>
 <!--/bv-->
 <!--b counting-->
 <div class="demo-counter"><!--v count/--></div>
 <a class="demo-btn" href="{{v action/}}"
-   hx-get="{{v action/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">Add one</a>
+   hx-get="{{v action/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">Add one</a>
 <!--/b-->
 <!--b done-->
 <div class="demo-counter">10</div>
 <p class="demo-done">done, the loop ran to completion, resuming from where it paused each time.</p>
 <a class="demo-btn" href="{{v webapp:rootUrl/}}demo/counter"
-   hx-get="{{v webapp:rootUrl/}}demo/counter" hx-target="closest .demo-stage" hx-swap="outerHTML">Start over</a>
+   hx-get="{{v webapp:rootUrl/}}demo/counter" hx-target="closest .demo-frame" hx-swap="outerHTML">Start over</a>
 <!--/b-->

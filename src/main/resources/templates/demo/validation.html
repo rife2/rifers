@@ -19,10 +19,11 @@
     <p class="demo-aside">The constraints don't have to live on the bean. With <a href="https://github.com/rife2/rife2/wiki/Metadata-Merging">metadata merging</a> you keep the bean a plain POJO and declare the same rules in a companion <code>SignupMetaData</code> class that RIFE2 weaves in.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <!--v result/-->
         <form class="demo-validation-form" method="post" action="{{v run_url/}}"
-              hx-post="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-post="{{v run_url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">
             <div class="demo-vfield">
                 <label>Validate
                     <select name="group" aria-label="which group to validate">
@@ -55,6 +56,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/ValidationDemo.java">View the source: ValidationDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/validation.html">and its template: validation.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">The rules are declared once on the bean and split into named groups. Validate everything, or just one group, like a single step of a wizard. Try an empty field, a bad email, or an age like 5.</p>
 </main>

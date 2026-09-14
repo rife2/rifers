@@ -19,12 +19,13 @@
     <p>The manager derives the table straight from a plain <code>Book</code> bean, then saves, restores and counts rows with single method calls. No SQL, no row mapping, no annotations.</p>
     <!--v stage/-->
 <!--bv stage-->
+<div class="demo-frame">
     <div class="demo-stage">
         <p class="demo-version"><!--v count/--> books in the database</p>
         <div class="demo-gqm-list"><!--v rows/--></div>
         <!--v saved/-->
         <form class="demo-gqm-form" method="get" action="{{v run_url/}}"
-              hx-get="{{v run_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">
+              hx-get="{{v run_url/}}" hx-target="closest .demo-frame" hx-swap="outerHTML">
             <input type="text" name="title" value="{{v title/}}" placeholder="Title" aria-label="book title" required>
             <input type="text" name="author" value="{{v author/}}" placeholder="Author" aria-label="book author">
             <button type="submit" class="demo-btn">Save book</button>
@@ -32,6 +33,7 @@
     </div>
     <p class="demo-note"><a class="demo-src" href="https://github.com/rife2/rifers/blob/main/src/main/java/rifers/elements/demo/GqmDemo.java">View the source: GqmDemo.java</a>
         <a class="demo-tpl" href="https://github.com/rife2/rifers/blob/main/src/main/resources/templates/demo/gqm.html">and its template: gqm.html</a></p>
+</div>
 <!--/bv-->
     <p class="demo-note">Every request builds a private in-memory database, seeds two books, saves yours next to them, reads them all back through the manager, then discards the database. Nothing is kept between requests, so it is only here to show the save and restore round-trip. Saving also sends an <code>HX-Trigger</code> response header, so the page flashes a toast from a client event with no extra request.</p>
 </main>
