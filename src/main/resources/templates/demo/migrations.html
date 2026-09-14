@@ -19,7 +19,7 @@
     <!--v stage/-->
 <!--bv stage-->
     <div class="demo-stage">
-        <p class="demo-version">Schema version {{v version/}} of {{v max/}}</p>
+        <p class="demo-version">Schema version <!--v version/--> of <!--v max/--></p>
         <div class="demo-schema"><!--v schema/--></div>
         <div class="demo-steps"><!--v steps/--></div>
     </div>
@@ -30,8 +30,8 @@
 </main>
 </body>
 </html>
-<!--b schema_table--><div class="demo-schema-table"><div class="demo-schema-name">{{v table_name/}}</div><!--v columns/--></div><!--/b-->
-<!--b schema_column--><div class="demo-schema-col"><span class="demo-schema-colname">{{v column_name/}}</span><span class="demo-schema-coltype">{{v column_type/}}</span></div><!--/b-->
+<!--b schema_table--><div class="demo-schema-table"><div class="demo-schema-name"><!--v table_name/--></div><!--v columns/--></div><!--/b-->
+<!--b schema_column--><div class="demo-schema-col"><span class="demo-schema-colname"><!--v column_name/--></span><span class="demo-schema-coltype"><!--v column_type/--></span></div><!--/b-->
 <!--b schema_empty--><p class="demo-schema-empty">empty database, no tables yet</p><!--/b-->
 <!--b step_back--><a class="demo-btn demo-btn-ghost" href="{{v back_url/}}"
    hx-get="{{v back_url/}}" hx-target="closest .demo-stage" hx-swap="outerHTML">&#9664; Roll back</a><!--/b-->

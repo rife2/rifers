@@ -54,19 +54,19 @@
                 </label>
             </div>
         </form>
-        <pre class="bld-config-out"><code class="language-java">package {{v package/}};
+        <pre class="bld-config-out"><code class="language-java">package <!--v package/-->;
 
-import rife.bld.{{v baseClass/}};
+import rife.bld.<!--v baseClass/-->;
 
 import java.util.List;
 
 import static rife.bld.dependencies.Repository.*;
 import static rife.bld.dependencies.Scope.*;<!--v templateTypeImport/-->
 
-public class {{v buildClass/}} extends {{v baseClass/}} {
-    public {{v buildClass/}}() {
-        pkg = "{{v package/}}";
-        name = "{{v artifact/}}";<!--v mainClassLine/-->
+public class <!--v buildClass/--> extends <!--v baseClass/--> {
+    public <!--v buildClass/-->() {
+        pkg = "<!--v package/-->";
+        name = "<!--v artifact/-->";<!--v mainClassLine/-->
         version = version(0,1,0);
 
         downloadSources = true;
@@ -74,7 +74,7 @@ public class {{v buildClass/}} extends {{v baseClass/}} {
     }
 
     public static void main(String[] args) {
-        new {{v buildClass/}}().start(args);
+        new <!--v buildClass/-->().start(args);
     }
 }</code></pre>
     </div>
@@ -89,10 +89,10 @@ public class {{v buildClass/}} extends {{v baseClass/}} {
 <!--b tt_import-->
 import static rife.bld.operations.TemplateType.*;<!--/b-->
 <!--b main_app-->
-        mainClass = "{{v package/}}.{{v baseName/}}";<!--/b-->
+        mainClass = "<!--v package/-->.<!--v baseName/-->";<!--/b-->
 <!--b main_web-->
-        mainClass = "{{v package/}}.{{v baseName/}}Site";
-        uberJarMainClass = "{{v package/}}.{{v baseName/}}SiteUber";<!--/b-->
+        mainClass = "<!--v package/-->.<!--v baseName/-->Site";
+        uberJarMainClass = "<!--v package/-->.<!--v baseName/-->SiteUber";<!--/b-->
 <!--b precompile_web-->
 
         precompileOperation()
