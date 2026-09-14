@@ -14,7 +14,7 @@ public class RifersBuild extends WebProject {
         name = "Rifers";
         mainClass = "rifers.RifersSite";
         uberJarMainClass = "rifers.RifersSiteUber";
-        version = version(2,3,0);
+        version = version(2,3,1);
 
         downloadSources = true;
         autoDownloadPurge = true;
