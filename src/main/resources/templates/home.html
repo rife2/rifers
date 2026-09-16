@@ -96,7 +96,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.form/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">One element serves both the GET that shows the form and the POST that shows the result.</p>
+                <p class="demo-note">One class serves both the GET that shows the form and the POST that shows the result.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -106,7 +106,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.validation/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Submit the form and each field that breaks its constraints gets a precise error. Try an empty name, a bad email, or an age like 5. The rules can also live in a separate metadata class, keeping the bean a plain POJO.</p>
+                <p class="demo-note">Submit the form and each field that breaks a rule gets a precise error. Try an empty name, a bad email, or an age like 5. The rules can also live in a separate metadata class, keeping the bean a plain POJO.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -116,7 +116,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.csrf/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">The real verification runs out of container. A legitimate submit is accepted, a forged cross-site request gets 403.</p>
+                <p class="demo-note">The real check runs in memory, with no server. A legitimate submit is accepted, a forged cross-site request gets 403.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -145,23 +145,23 @@
             </details>
         </div>
         <div role="tabpanel" hidden>
-            <p class="caption">Templates are plain files with no embedded logic or expressions (HTML here, also XML, text, JSON and more): named blocks are the pieces, and Java assembles them. Open the live demo and the branch that runs for the current state lights up here.</p>
+            <p class="caption">Templates are plain files with no embedded logic or expressions (HTML here, also XML, text, JSON and more): named sections are the pieces, and Java assembles them. Open the live demo and the branch that runs for the current state lights up here.</p>
             <pre data-src="{{v webapp:rootUrl/}}examples/HelloTemplate.java"></pre>
             <details class="demo-inline" data-highlight-field="state" data-highlight-welcome="18" data-highlight-dashboard="9-16">
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.templates/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">The same logic-less template renders both pages, and the highlighted lines above are the Java branch that just ran. Flip the state and only the Java's choice of block changes.</p>
+                <p class="demo-note">The same logic-less template renders both pages, and the highlighted lines above are the Java branch that just ran. Flip the state and only the section Java picks changes.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
-            <p class="caption">One element serves a browser the whole page and htmx just the changed fragment, with no client-side rendering code</p>
+            <p class="caption">One route serves a browser the whole page and htmx just the part that changed, with no client-side rendering code</p>
             <pre data-src="{{v webapp:rootUrl/}}examples/HelloHtmx.java"></pre>
             <details class="demo-inline">
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.htmx/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Type to filter: each keystroke fetches only the updated list, returned with <code>printHtmxFragment</code> from a template block rather than as a whole page.</p>
+                <p class="demo-note">Type to filter: each keystroke fetches only the updated list, returned with <code>printHtmxFragment</code> from one section of the template rather than as a whole page.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -197,7 +197,7 @@
             </details>
         </div>
         <div role="tabpanel" hidden>
-            <p class="caption">Versioned schema evolution with declarative, reversible migrations</p>
+            <p class="caption">Versioned schema changes, written in Java and reversible</p>
             <pre data-src="{{v webapp:rootUrl/}}examples/HelloMigrations.java"></pre>
             <details class="demo-inline">
                 <summary class="demo-toggle">Try it live</summary>
@@ -213,7 +213,7 @@
                 <summary class="demo-toggle">Try it live</summary>
                 <div class="demo-live" hx-get="{{v route:.demos.queries/}}"
                      hx-trigger="toggle once from:closest details" hx-swap="innerHTML"></div>
-                <p class="demo-note">Pick a database and only the generated SQL changes. One type-safe query, tailored to each dialect, and RIFE2 even rejects a clause a database can't run.</p>
+                <p class="demo-note">Pick a database and only the generated SQL changes. One Java query, tailored to each dialect, and RIFE2 even rejects a clause a database can't run.</p>
             </details>
         </div>
         <div role="tabpanel" hidden>
@@ -227,7 +227,7 @@
             </details>
         </div>
         <div role="tabpanel" hidden>
-            <p class="caption">Out-of-container tests drive forms and links like a browser, with no running server</p>
+            <p class="caption">Tests drive forms and links like a browser, in memory, with no running server</p>
             <pre data-src="{{v webapp:rootUrl/}}examples/GreeterTest.java"></pre>
             <details class="demo-inline">
                 <summary class="demo-toggle">Try it live</summary>
